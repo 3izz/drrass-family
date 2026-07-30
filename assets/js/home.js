@@ -63,11 +63,13 @@
     const items = data.items.slice(0, 8);
     grid.innerHTML = items.map((item) => `
       <div class="gallery-item reveal">
-        <img class="lazy-img" data-name="${item.title[L]}" data-placeholder-kind="photo" alt="${item.title[L]}">
+        ${item.image
+          ? `<img class="lazy-img is-loaded" src="${item.image}" alt="${item.title[L]}">`
+          : `<img class="lazy-img" data-name="${item.title[L]}" data-placeholder-kind="photo" alt="${item.title[L]}">`}
         <div class="gallery-item__overlay"><span>${item.title[L]}</span></div>
       </div>
     `).join('');
-    grid.querySelectorAll('img.lazy-img').forEach((img) => FamilyAvatar.lazyMount(img));
+    grid.querySelectorAll('img.lazy-img[data-name]').forEach((img) => FamilyAvatar.lazyMount(img));
   }
 
   async function renderNewsPreview() {

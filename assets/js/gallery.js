@@ -40,7 +40,9 @@
     const grid = document.getElementById('gallery-grid');
     grid.innerHTML = filteredItems.map((item, i) => `
       <div class="gallery-item reveal" data-index="${i}">
-        <img class="lazy-img" data-name="${item.title[L]}" data-placeholder-kind="photo" alt="${item.title[L]}" loading="lazy">
+        ${item.image
+          ? `<img class="lazy-img is-loaded" src="${item.image}" alt="${item.title[L]}" loading="lazy">`
+          : `<img class="lazy-img" data-name="${item.title[L]}" data-placeholder-kind="photo" alt="${item.title[L]}" loading="lazy">`}
         <div class="gallery-item__overlay"><span>${item.title[L]} · <span class="ltr-nums">${item.year}</span></span></div>
       </div>
     `).join('');
@@ -49,7 +51,7 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target.querySelector('img');
-          FamilyAvatar.lazyMount(img);
+          if (img.dataset.name) FamilyAvatar.lazyMount(img);
           entry.target.classList.add('is-visible');
           io.unobserve(entry.target);
         }
@@ -77,7 +79,7 @@
   function showLightboxItem() {
     const L = lang();
     const item = filteredItems[currentIndex];
-    lightboxImg.src = FamilyAvatar.makeContentPlaceholder(item.title[L], { size: 600, kind: 'photo' });
+    lightboxImg.src = item.image || FamilyAvatar.makeContentPlaceholder(item.title[L], { size: 600, kind: 'photo' });
     lightboxImg.alt = item.title[L];
     lightboxCaption.textContent = `${item.title[L]} — ${item.caption[L]} (${item.year})`;
   }

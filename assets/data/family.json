@@ -208,7 +208,11 @@
         "ar": "",
         "en": ""
       },
-      "isFounder": false
+      "isFounder": false,
+      "historicalNote": {
+        "ar": "مذكور باسم «حسين محمد مصطفى الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872.",
+        "en": "Listed as \"Hussein Mohammad Mustafa Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja village."
+      }
     },
     {
       "id": "d2ad56ba-80f4-4418-9fc4-e6770af44d23",
@@ -246,7 +250,11 @@
         "ar": "",
         "en": ""
       },
-      "isFounder": false
+      "isFounder": false,
+      "historicalNote": {
+        "ar": "مذكور باسم «محمود محمد الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872.",
+        "en": "Listed as \"Mahmoud Mohammad Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja village."
+      }
     },
     {
       "id": "6cb156b5-ad35-43d1-a852-cc0746626b17",
@@ -638,7 +646,11 @@
         "ar": "",
         "en": ""
       },
-      "isFounder": false
+      "isFounder": false,
+      "historicalNote": {
+        "ar": "مذكور باسم «عبد القادر محمود الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872.",
+        "en": "Listed as \"Abdul Qader Mahmoud Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja village."
+      }
     },
     {
       "id": "57d1b592-d4f6-4aad-ac9f-b0b533cc25bc",
@@ -894,7 +906,11 @@
         "ar": "",
         "en": ""
       },
-      "isFounder": false
+      "isFounder": false,
+      "historicalNote": {
+        "ar": "هاجر إلى تشيلي عام 1918 واستقر في سانتياغو، حيث لا تزال لافتة «Casa Darras» قائمة على أرضه حتى اليوم.",
+        "en": "Emigrated to Chile in 1918 and settled in Santiago, where a \"Casa Darras\" sign still stands on his land today."
+      }
     },
     {
       "id": "63d3f55a-6a35-48b5-974b-3e9fc98c1c63",
@@ -1923,7 +1939,11 @@
         "ar": "",
         "en": ""
       },
-      "isFounder": false
+      "isFounder": false,
+      "historicalNote": {
+        "ar": "صورته محفوظة في أرشيف مجموعة العائلة على فيسبوك.",
+        "en": "His portrait is preserved in the family's Facebook group archive."
+      }
     },
     {
       "id": "ed41dbf3-ee45-4c0c-a7de-42937110402b",

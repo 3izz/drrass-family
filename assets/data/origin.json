@@ -1,12 +1,45 @@
 {
   "intro": {
-    "ar": "لم تُستكمل بعد كتابة القصة الكاملة لأصل عائلة الدّراس ومسار هجرتها عبر الزمن. هذه الخريطة تفاعلية وجاهزة لاستقبال المواقع الحقيقية — الموطن الأول، محطات الهجرة، والأماكن التي استقرت فيها فروع العائلة — بمجرد أن يشاركها أحد أفراد العائلة.",
-    "en": "The complete story of the Al-Drrass family's origin and migration has not been written yet. This interactive map is ready to receive real locations — the first homeland, migration waypoints, and where each branch settled — as soon as a family member contributes them."
+    "ar": "تعود جذور عائلة الدّراس إلى قرية الولجة الفلسطينية، حيث يُذكر أفراد من العائلة باسم «الدّراس» في إحصاء الدولة العثمانية للقرية عام 1872. مع مطلع القرن العشرين، هاجر أحد أبناء فرع هدهد إلى تشيلي عام 1918 واستقر في سانتياغو. هذه الخريطة توثّق ما هو معروف حتى الآن، وتبقى مفتوحة لإضافة محطات هجرة أخرى من مختلف فروع العائلة.",
+    "en": "The Al-Drrass family traces its roots to the Palestinian village of Al-Walaja, where family members are recorded under the name \"Al-Drrass\" in the Ottoman-era census of the village in 1872. At the turn of the 20th century, a member of the Hudhud branch emigrated to Chile in 1918 and settled in Santiago. This map documents what is known so far and remains open for other branches' migration stories to be added."
   },
   "locations": [
-    { "id": "origin", "x": 28, "y": 46, "label": { "ar": "الموطن الأول", "en": "The First Homeland" }, "description": { "ar": "لم تتم إضافة تفاصيل الموطن الأول بعد.", "en": "Details of the first homeland have not been added yet." }, "documented": false },
-    { "id": "waypoint1", "x": 46, "y": 34, "label": { "ar": "محطة هجرة", "en": "A Migration Waypoint" }, "description": { "ar": "أضف اسم المكان والقصة المرتبطة به.", "en": "Add the place name and its story." }, "documented": false },
-    { "id": "branch1", "x": 62, "y": 55, "label": { "ar": "استقرار أحد الفروع", "en": "Where a Branch Settled" }, "description": { "ar": "شاركنا أين استقر هذا الفرع من العائلة.", "en": "Tell us where this branch of the family settled." }, "documented": false },
-    { "id": "branch2", "x": 74, "y": 30, "label": { "ar": "استقرار فرع آخر", "en": "Where Another Branch Settled" }, "description": { "ar": "معلومة قابلة للإضافة عبر صفحة الاقتراحات.", "en": "This information can be added via the Suggestions page." }, "documented": false }
+    {
+      "id": "walaja",
+      "x": 26,
+      "y": 42,
+      "year": 1872,
+      "label": { "ar": "الولجة، فلسطين", "en": "Al-Walaja, Palestine" },
+      "description": {
+        "ar": "الموطن الأصلي للعائلة. يظهر ثلاثة من الأجداد المباشرين — حسين ومحمود ابنا محمد بن مصطفى، وعبد القادر بن محمود — باسم «الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872، وتؤكد هذه الأسماء الثلاثة نسب الشجرة المسجّلة اليوم جيلاً بجيل.",
+        "en": "The family's ancestral homeland. Three direct ancestors — Hussein and Mahmoud, sons of Mohammad son of Mustafa, and Abdul Qader son of Mahmoud — appear under the name \"Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja, independently confirming the tree's recorded lineage generation by generation."
+      },
+      "documented": true,
+      "image": "assets/images/historical-walaja-village-1936.jpg"
+    },
+    {
+      "id": "chile",
+      "x": 68,
+      "y": 63,
+      "year": 1918,
+      "label": { "ar": "سانتياغو، تشيلي", "en": "Santiago, Chile" },
+      "description": {
+        "ar": "هاجر أحمد محمد حمدان (من فرع هدهد) إلى تشيلي عام 1918 واستقر في سانتياغو. لا تزال لافتة «Casa Darras» قائمة على أرضه هناك حتى اليوم، شاهدة على هذه الرحلة.",
+        "en": "Ahmad Mohammad Hamdan (of the Hudhud branch) emigrated to Chile in 1918 and settled in Santiago. A \"Casa Darras\" sign still stands on his land there today, a lasting witness to that journey."
+      },
+      "documented": true,
+      "image": "assets/images/historical-casa-darras-chile-1918.jpg"
+    },
+    {
+      "id": "other-branches",
+      "x": 45,
+      "y": 25,
+      "label": { "ar": "فروع أخرى؟", "en": "Other branches?" },
+      "description": {
+        "ar": "مسار فرع مصطفى وبقية فروع العائلة بعد الولجة لم يُوثَّق بعد بالكامل.",
+        "en": "The journey of the Mustafa branch and the rest of the family after Al-Walaja hasn't been fully documented yet."
+      },
+      "documented": false
+    }
   ]
 }

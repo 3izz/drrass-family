@@ -1,7 +1,9 @@
 /**
  * documents.js — renders the document archive list from documents.json.
- * No real PDF files are bundled with this template, so Preview/Download
- * open an explanatory modal instead of a broken link.
+ * Entries with a real `image` file (the 1872 census, the nahiya table)
+ * open an actual preview and download; the rest are illustrative
+ * placeholders and open an explanatory "help us add it" modal instead of
+ * a broken link.
  */
 (function () {
   'use strict';
@@ -13,14 +15,23 @@
 
   function openDocModal(doc) {
     const L = lang();
-    modalContent.innerHTML = `
-      <h3 class="heading-sm">${doc.title[L]}</h3>
-      <p class="text-muted" style="margin-block-start:0.75rem;">${doc.description[L]}</p>
-      <p class="text-muted" style="margin-block-start:1rem;font-size:0.85rem;">
-        ${L === 'ar' ? 'لم يتم رفع الملف الأصلي بعد لهذه المنصة.' : 'The original file has not been uploaded to this platform yet.'}
-      </p>
-      <a href="suggestions.html" class="btn btn--gold btn--sm" style="margin-block-start:1rem;">${L === 'ar' ? 'ساعدنا برفعه' : 'Help us add it'}</a>
-    `;
+    if (doc.image) {
+      modalContent.innerHTML = `
+        <img src="${doc.image}" alt="${doc.title[L]}" style="width:100%;border-radius:var(--radius-sm);margin-block-end:1rem;">
+        <h3 class="heading-sm">${doc.title[L]}</h3>
+        <p class="text-muted" style="margin-block-start:0.75rem;">${doc.description[L]}</p>
+        <a href="${doc.image}" download class="btn btn--gold btn--sm" style="margin-block-start:1rem;">${L === 'ar' ? 'تحميل الصورة' : 'Download Image'}</a>
+      `;
+    } else {
+      modalContent.innerHTML = `
+        <h3 class="heading-sm">${doc.title[L]}</h3>
+        <p class="text-muted" style="margin-block-start:0.75rem;">${doc.description[L]}</p>
+        <p class="text-muted" style="margin-block-start:1rem;font-size:0.85rem;">
+          ${L === 'ar' ? 'لم يتم رفع الملف الأصلي بعد لهذه المنصة.' : 'The original file has not been uploaded to this platform yet.'}
+        </p>
+        <a href="suggestions.html" class="btn btn--gold btn--sm" style="margin-block-start:1rem;">${L === 'ar' ? 'ساعدنا برفعه' : 'Help us add it'}</a>
+      `;
+    }
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -32,8 +43,10 @@
     const list = document.getElementById('doc-list');
     list.innerHTML = docs.map((doc, i) => `
       <div class="doc-row reveal reveal-delay-${Math.min(i % 4, 3)}" data-index="${i}">
-        <div class="doc-row__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>
+        <div class="doc-row__icon" style="${doc.image ? 'padding:0;overflow:hidden;' : ''}">
+          ${doc.image
+            ? `<img src="${doc.image}" alt="" style="width:100%;height:100%;object-fit:cover;">`
+            : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>`}
         </div>
         <div class="doc-row__meta">
           <div class="doc-row__title">${doc.title[L]}</div>

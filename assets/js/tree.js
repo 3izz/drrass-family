@@ -605,9 +605,15 @@
             ${m.alive === false ? ` · ${L === 'ar' ? 'متوفى' : 'Deceased'}` : ''}
           </div>
           ${m.branch ? `<span class="member-profile__branch">${m.branch[L]}</span>` : ''}
+          ${m.historicalNote ? `<span class="member-profile__branch" style="border-color:var(--color-gold-500);color:var(--accent-gold-bright);">✓ ${L === 'ar' ? 'موثّق تاريخيًا' : 'Historically Documented'}</span>` : ''}
         </div>
       </div>
       <div class="member-profile__body">
+        ${m.historicalNote ? `
+        <div style="background:rgba(200,162,77,0.08);border:1px solid var(--border-on-dark);border-radius:var(--radius-md);padding:1rem;">
+          <h3 class="heading-sm" style="font-size:0.95rem;margin-block-end:0.4rem;color:var(--accent-gold-bright);">📜 ${L === 'ar' ? 'ملاحظة تاريخية موثّقة' : 'Documented Historical Note'}</h3>
+          <p class="text-muted" style="font-size:0.9rem;">${m.historicalNote[L]}</p>
+        </div>` : ''}
         <div>
           <h3 class="heading-sm" style="font-size:1rem;margin-block-end:0.5rem;">${L === 'ar' ? 'نبذة' : 'Biography'}</h3>
           ${bio
