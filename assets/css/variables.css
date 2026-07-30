@@ -1,0 +1,100 @@
+/* ==========================================================================
+   الدّراس — Design Tokens
+   Luxury heritage palette: deep navy, dark green, warm beige, gold accent.
+   ========================================================================== */
+:root {
+  /* ---- Colors ---- */
+  --color-navy-950: #060d14;
+  --color-navy-900: #0a1622;
+  --color-navy-800: #0f1f2e;
+  --color-navy-700: #16293b;
+  --color-navy-600: #1e3a52;
+
+  --color-green-900: #0c2118;
+  --color-green-800: #123527;
+  --color-green-700: #1a4a35;
+  --color-green-600: #235f45;
+  --color-green-500: #2f7a58;
+
+  --color-beige-50: #fbf7ef;
+  --color-beige-100: #f5ecdb;
+  --color-beige-200: #ecdfc0;
+  --color-beige-300: #ddcda0;
+
+  --color-gold-100: #f4e4b8;
+  --color-gold-300: #e6c477;
+  --color-gold-500: #c8a24d;
+  --color-gold-600: #b08a35;
+  --color-gold-700: #8f6d24;
+
+  --color-white: #ffffff;
+  --color-ink: #0a1622;
+  --color-ink-soft: rgba(10, 22, 34, 0.72);
+  --color-ink-faint: rgba(10, 22, 34, 0.5);
+
+  /* Semantic aliases */
+  --bg-primary: var(--color-navy-950);
+  --bg-secondary: var(--color-navy-900);
+  --bg-panel: var(--color-navy-800);
+  --bg-light: var(--color-beige-50);
+  --accent-gold: var(--color-gold-500);
+  --accent-gold-bright: var(--color-gold-300);
+  --text-on-dark: var(--color-beige-50);
+  --text-on-dark-soft: rgba(245, 236, 219, 0.72);
+  --text-on-light: var(--color-ink);
+  --border-on-dark: rgba(230, 196, 119, 0.18);
+  --border-on-light: rgba(10, 22, 34, 0.1);
+
+  /* ---- Typography ---- */
+  --font-ar: 'Cairo', 'Segoe UI', sans-serif;
+  --font-en: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: var(--font-ar);
+
+  --fs-display: clamp(2.8rem, 6vw, 6rem);
+  --fs-h1: clamp(2.2rem, 4.5vw, 3.6rem);
+  --fs-h2: clamp(1.8rem, 3.2vw, 2.6rem);
+  --fs-h3: clamp(1.3rem, 2.2vw, 1.7rem);
+  --fs-body: clamp(1rem, 1.1vw, 1.125rem);
+  --fs-small: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  /* ---- Spacing scale ---- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* ---- Layout ---- */
+  --container-max: 1320px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+  --nav-height: 84px;
+
+  /* ---- Shadow & motion ---- */
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --shadow-gold: 0 10px 40px rgba(200, 162, 77, 0.25);
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.5s;
+  --dur-slow: 0.9s;
+
+  /* ---- Gold gradient ---- */
+  --gradient-gold: linear-gradient(120deg, #8f6d24 0%, #e6c477 45%, #c8a24d 60%, #8f6d24 100%);
+  --gradient-navy: linear-gradient(160deg, var(--color-navy-950) 0%, var(--color-navy-800) 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(6, 13, 20, 0.35) 0%, rgba(6, 13, 20, 0.85) 78%, rgba(6, 13, 20, 1) 100%);
+}
+
+:root[dir="rtl"] {
+  --font-body: var(--font-ar);
+}
+:root[dir="ltr"] {
+  --font-body: var(--font-en);
+}

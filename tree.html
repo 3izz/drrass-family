@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شجرة العائلة | الدّراس</title>
+<meta name="description" content="شجرة نسب تفاعلية لعائلة الدّراس، ابحث، كبّر وصغّر، واكتشف صلة القرابة بين أي فردين.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="شجرة العائلة | الدّراس">
+<meta property="og:description" content="شجرة نسب تفاعلية لعائلة الدّراس، ابحث، كبّر وصغّر، واكتشف صلة القرابة بين أي فردين.">
+<meta property="og:locale" content="ar_AR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/tree.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/rtl.css">
+<style>
+  #print-outline { display: none; }
+  @media print {
+    .site-header, .nav-scrim, .tree-toolbar, .tree-zoom-controls, .tree-minimap,
+    .tree-legend, .relation-viewer, .back-to-top, .modal-overlay, .loader { display: none !important; }
+    .tree-stage { display: none !important; }
+    #print-outline { display: block !important; padding: 2rem; color: #000; }
+    #print-outline ul { padding-inline-start: 1.4rem; }
+    #print-outline li { margin-block: 0.3rem; }
+    body { background: #fff; color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="loader" aria-hidden="true"><div class="loader__emblem"><span>د</span></div><div class="loader__label">الدّراس</div></div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">د</span>
+      <span class="brand__text"><span class="brand__name" data-i18n="brand.name">الدّراس</span><span class="brand__tagline" data-i18n="brand.tagline">من جذورٍ راسخة</span></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="التنقل الرئيسي">
+      <ul class="main-nav__list">
+        <li><a href="index.html" class="main-nav__link" data-i18n="nav.home">الرئيسية</a></li>
+        <li><a href="about.html" class="main-nav__link" data-i18n="nav.about">من نحن</a></li>
+        <li><a href="origin.html" class="main-nav__link" data-i18n="nav.origin">أصل العائلة</a></li>
+        <li><a href="tree.html" class="main-nav__link" data-i18n="nav.tree">شجرة العائلة</a></li>
+        <li><a href="gallery.html" class="main-nav__link" data-i18n="nav.gallery">معرض الصور</a></li>
+        <li><a href="museum.html" class="main-nav__link" data-i18n="nav.museum">المتحف الرقمي</a></li>
+        <li><a href="documents.html" class="main-nav__link" data-i18n="nav.documents">الوثائق</a></li>
+        <li><a href="news.html" class="main-nav__link" data-i18n="nav.news">الأخبار</a></li>
+        <li><a href="events.html" class="main-nav__link" data-i18n="nav.events">الفعاليات</a></li>
+        <li><a href="births.html" class="main-nav__link" data-i18n="nav.births">المواليد</a></li>
+        <li><a href="deaths.html" class="main-nav__link" data-i18n="nav.deaths">الوفيات</a></li>
+        <li><a href="suggestions.html" class="main-nav__link" data-i18n="nav.suggestions">اقتراحات</a></li>
+        <li><a href="contact.html" class="main-nav__link" data-i18n="nav.contact">تواصل معنا</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="اختيار اللغة"><button class="lang-switch__btn" data-lang="ar">AR</button><button class="lang-switch__btn" data-lang="en">EN</button></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="فتح القائمة" aria-controls="main-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="nav-scrim"></div>
+
+<main id="main" class="tree-page">
+  <div class="tree-toolbar">
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="tree-search" placeholder="ابحث بالاسم..." data-i18n-attr="placeholder:tree.search.placeholder" autocomplete="off">
+      <div class="search-results" id="tree-search-results"></div>
+    </div>
+    <select class="tree-toolbar__select" id="branch-filter">
+      <option value="all">كل الفروع</option>
+    </select>
+    <div class="tree-toolbar__controls">
+      <button class="btn btn--outline btn--sm" id="compare-toggle" data-i18n="tree.compare">🔗 حاسبة القرابة</button>
+      <button class="btn btn--outline btn--sm" id="expand-all-btn" data-i18n="tree.expandAll">فتح الكل</button>
+      <button class="btn btn--outline btn--sm" id="collapse-all-btn" data-i18n="tree.collapseAll">طي الكل</button>
+      <button class="btn btn--outline btn--sm" id="print-btn" data-i18n="tree.print">🖨️ طباعة</button>
+    </div>
+  </div>
+
+  <div class="tree-stage" id="tree-stage">
+    <div class="tree-legend">
+      <span><i style="background:var(--color-gold-500)"></i> <span data-i18n="tree.legend.root">الجذر</span></span>
+      <span><i style="background:#6fb98f"></i> <span data-i18n="tree.legend.a">اختيار (أ)</span></span>
+      <span><i style="background:#e6c477"></i> <span data-i18n="tree.legend.b">اختيار (ب)</span></span>
+    </div>
+    <div class="tree-stage__viewport" id="tree-viewport">
+      <svg class="tree-links" id="tree-links"></svg>
+      <div class="tree-canvas" id="tree-canvas"></div>
+    </div>
+    <div class="tree-empty-state" id="tree-loading">
+      <div class="loader__emblem" style="width:56px;height:56px;"><span style="font-size:1rem;">د</span></div>
+      <p data-i18n="common.loading">جارٍ التحميل...</p>
+    </div>
+    <div class="tree-zoom-controls">
+      <button id="zoom-in" aria-label="تكبير">+</button>
+      <button id="zoom-reset" aria-label="إعادة ضبط" style="font-size:0.8rem;">⤾</button>
+      <button id="zoom-out" aria-label="تصغير">−</button>
+    </div>
+    <div class="tree-minimap" id="tree-minimap"><canvas id="minimap-canvas" width="180" height="120"></canvas></div>
+  </div>
+
+  <div class="relation-viewer" id="relation-viewer">
+    <div class="relation-viewer__inner">
+      <div class="relation-viewer__slot" id="slot-a" data-i18n="tree.slot.first">اختر الفرد الأول</div>
+      <div class="relation-viewer__slot" id="slot-b" data-i18n="tree.slot.second">اختر الفرد الثاني</div>
+      <div style="flex:1;min-width:220px;">
+        <div class="relation-viewer__result" id="relation-result"></div>
+        <div class="relation-viewer__path" id="relation-path"></div>
+      </div>
+      <button class="icon-btn" id="relation-close" aria-label="إغلاق">✕</button>
+    </div>
+  </div>
+
+  <div id="print-outline">
+    <h1>شجرة عائلة الدّراس</h1>
+    <div id="print-outline-content"></div>
+  </div>
+</main>
+
+<!-- Member profile modal -->
+<div class="modal-overlay" id="member-modal">
+  <div class="modal">
+    <button class="modal__close" data-modal-close aria-label="إغلاق">✕</button>
+    <div id="member-modal-content"></div>
+  </div>
+</div>
+
+<script src="assets/js/avatar.js"></script>
+<script src="assets/js/data-loader.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/qrcode.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/tree.js"></script>
+</body>
+</html>

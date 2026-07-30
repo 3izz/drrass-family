@@ -1,0 +1,50 @@
+[
+  {
+    "id": "n001",
+    "category": { "ar": "إنجاز", "en": "Achievement" },
+    "date": "2026-06-14",
+    "title": { "ar": "إطلاق المنصة الرقمية لعائلة الدّراس", "en": "Al-Drrass Family Digital Platform Goes Live" },
+    "excerpt": { "ar": "انطلاق أول منصة رقمية توثّق تاريخ العائلة وتربط أجيالها حول العالم.", "en": "The launch of the first digital platform documenting the family's history and connecting its generations worldwide." },
+    "body": { "ar": "بعد أشهر من العمل والتوثيق، أطلقت العائلة منصتها الرقمية الجديدة التي تضم شجرة نسب تفاعلية، ومعرض صور، وأرشيفًا للوثائق التاريخية، لتكون مرجعًا لكل أبناء العائلة عبر الأجيال.", "en": "After months of work and documentation, the family has launched its new digital platform featuring an interactive family tree, a photo gallery, and a historical document archive — a reference point for every generation to come." }
+  },
+  {
+    "id": "n002",
+    "category": { "ar": "فعالية", "en": "Event" },
+    "date": "2026-03-02",
+    "title": { "ar": "اللقاء السنوي يجمع أكثر من 200 فرد من العائلة", "en": "Annual Gathering Brings Together Over 200 Family Members" },
+    "excerpt": { "ar": "حضور استثنائي هذا العام في اللقاء السنوي الذي أقيم في الرياض.", "en": "An exceptional turnout this year at the annual gathering held in Riyadh." },
+    "body": { "ar": "شهد اللقاء السنوي لهذا العام حضورًا كبيرًا من مختلف فروع العائلة، وتضمن الحفل كلمات لكبار العائلة، وتكريمًا للمتفوقين من الجيل الجديد.", "en": "This year's annual gathering saw a strong turnout from every branch of the family, including remarks from the elders and recognition for the new generation's top achievers." }
+  },
+  {
+    "id": "n003",
+    "category": { "ar": "تكريم", "en": "Recognition" },
+    "date": "2025-11-20",
+    "title": { "ar": "تكريم أحد أبناء العائلة لحصوله على درجة الدكتوراه", "en": "Family Member Honored for Earning a Doctorate" },
+    "excerpt": { "ar": "احتفاء عائلي بإنجاز علمي جديد يضاف لسجل العائلة.", "en": "A family celebration of a new academic milestone added to the family's record." },
+    "body": { "ar": "احتفلت العائلة بتخرج أحد أبنائها حاملاً درجة الدكتوراه في الهندسة، في مناسبة حضرها عدد كبير من الأقارب تأكيدًا على قيمة العلم في تاريخ العائلة.", "en": "The family celebrated one of its sons graduating with a doctorate in engineering, at an event attended by many relatives, reaffirming the value the family places on education." }
+  },
+  {
+    "id": "n004",
+    "category": { "ar": "خيري", "en": "Charity" },
+    "date": "2025-09-05",
+    "title": { "ar": "إطلاق مبادرة العائلة الخيرية السنوية", "en": "Launch of the Family's Annual Charitable Initiative" },
+    "excerpt": { "ar": "مبادرة جديدة لدعم الأسر المحتاجة باسم العائلة.", "en": "A new initiative supporting families in need, launched under the family's name." },
+    "body": { "ar": "أطلقت العائلة مبادرتها الخيرية السنوية بمشاركة واسعة من أفرادها، بهدف دعم الأسر المحتاجة وتخليد اسم الجد الأكبر بأعمال خيّرة مستمرة.", "en": "The family launched its annual charitable initiative with wide participation, aiming to support families in need and honor the founder's legacy through continued good work." }
+  },
+  {
+    "id": "n005",
+    "category": { "ar": "توثيق", "en": "Documentation" },
+    "date": "2025-05-18",
+    "title": { "ar": "استكمال أرشفة الوثائق التاريخية للعائلة", "en": "Completion of the Family's Historical Document Archive" },
+    "excerpt": { "ar": "فريق التوثيق ينجز جمع وأرشفة وثائق تعود لأكثر من قرن.", "en": "The documentation team completes gathering and archiving records spanning more than a century." },
+    "body": { "ar": "بعد جهد جماعي استمر عامين، تمكن فريق التوثيق من جمع وأرشفة وثائق ورسائل تاريخية تعود لأكثر من مئة عام، لتكون جزءًا من المتحف الرقمي للعائلة.", "en": "After a two-year collective effort, the documentation team successfully gathered and archived historical documents and letters spanning over a hundred years, now part of the family's digital museum." }
+  },
+  {
+    "id": "n006",
+    "category": { "ar": "رياضة", "en": "Sports" },
+    "date": "2025-02-10",
+    "title": { "ar": "بطولة العائلة الرياضية السنوية", "en": "The Family's Annual Sports Tournament" },
+    "excerpt": { "ar": "منافسة ودية بين فروع العائلة في عدة ألعاب رياضية.", "en": "A friendly competition between the family's branches across several sports." },
+    "body": { "ar": "أقيمت بطولة العائلة الرياضية بمشاركة فرق من مختلف الفروع، في أجواء أخوية عكست الترابط الأسري المستمر منذ الجد الأكبر.", "en": "The family's sports tournament was held with teams from various branches taking part, in a friendly atmosphere reflecting the family bond that has continued since the founder." }
+  }
+]

@@ -1,0 +1,20 @@
+/* ==========================================================================
+   الدّراس — RTL / LTR direction handling
+   Most layout uses logical properties (inset-inline, margin-inline, etc.)
+   already; this file covers the remaining physical-property exceptions.
+   ========================================================================== */
+
+:root[dir="ltr"] .brand__name,
+:root[dir="ltr"] .hero__title,
+:root[dir="ltr"] .hero__crest span { font-family: var(--font-en); }
+
+:root[dir="ltr"] body { font-family: var(--font-en); }
+
+/* Icons that visually imply direction (arrows) flip in RTL */
+:root[dir="rtl"] .icon-flip { transform: scaleX(-1); }
+
+:root[dir="rtl"] .timeline__item:nth-child(odd) { text-align: end; }
+:root[dir="rtl"] .timeline__item:nth-child(even) { text-align: start; }
+
+/* Number/date fragments stay LTR even inside RTL text */
+.ltr-nums { direction: ltr; unicode-bidi: isolate; font-family: var(--font-en); }

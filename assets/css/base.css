@@ -1,0 +1,189 @@
+/* ==========================================================================
+   الدّراس — Base / Reset / Typography
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-on-dark);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { padding: 0; margin: 0; list-style: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+p { margin: 0; }
+
+[lang="en"], .lang-en { font-family: var(--font-en); }
+[lang="ar"], .lang-ar { font-family: var(--font-ar); }
+
+/* Focus states — accessible + on-brand */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-navy-950);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-navy-950); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-700); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold-500); }
+
+/* ---- Layout helpers ---- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+.section { padding-block: var(--space-2xl); position: relative; }
+.section--tight { padding-block: var(--space-xl); }
+.section--light { background: var(--bg-light); color: var(--text-on-light); }
+.section--panel { background: var(--bg-panel); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-gold-bright);
+  margin-block-end: var(--space-sm);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--gradient-gold);
+}
+
+.heading-xl { font-size: var(--fs-display); }
+.heading-lg { font-size: var(--fs-h1); }
+.heading-md { font-size: var(--fs-h2); }
+.heading-sm { font-size: var(--fs-h3); }
+
+.text-muted { color: var(--text-on-dark-soft); }
+.section--light .text-muted { color: var(--color-ink-soft); }
+
+.text-gold { color: var(--accent-gold-bright); }
+
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: -0.35em;
+  height: 2px;
+  width: 100%;
+  background: var(--gradient-gold);
+  border-radius: var(--radius-full);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 980px) {
+  .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  inset-inline-start: var(--space-sm);
+  background: var(--color-gold-500);
+  color: var(--color-navy-950);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  z-index: 2000;
+  font-weight: 700;
+  transition: top var(--dur-fast) var(--ease-smooth);
+}
+.skip-link:focus { top: var(--space-sm); }
+
+/* Ornamental Arabesque divider used across pages */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-block: var(--space-lg);
+  color: var(--accent-gold);
+  opacity: 0.8;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.ornament-divider::after { background: linear-gradient(90deg, currentColor, transparent); }
+
+/* Subtle geometric pattern background (Arabic star tiling), pure CSS */
+.pattern-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 0 8px, currentColor 8px 9px, transparent 9px),
+    repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 40px);
+  background-size: 80px 80px, 80px 80px, 80px 80px;
+  color: var(--color-gold-500);
+}

@@ -1,0 +1,12 @@
+{
+  "intro": {
+    "ar": "لم تُستكمل بعد كتابة القصة الكاملة لأصل عائلة الدّراس ومسار هجرتها عبر الزمن. هذه الخريطة تفاعلية وجاهزة لاستقبال المواقع الحقيقية — الموطن الأول، محطات الهجرة، والأماكن التي استقرت فيها فروع العائلة — بمجرد أن يشاركها أحد أفراد العائلة.",
+    "en": "The complete story of the Al-Drrass family's origin and migration has not been written yet. This interactive map is ready to receive real locations — the first homeland, migration waypoints, and where each branch settled — as soon as a family member contributes them."
+  },
+  "locations": [
+    { "id": "origin", "x": 28, "y": 46, "label": { "ar": "الموطن الأول", "en": "The First Homeland" }, "description": { "ar": "لم تتم إضافة تفاصيل الموطن الأول بعد.", "en": "Details of the first homeland have not been added yet." }, "documented": false },
+    { "id": "waypoint1", "x": 46, "y": 34, "label": { "ar": "محطة هجرة", "en": "A Migration Waypoint" }, "description": { "ar": "أضف اسم المكان والقصة المرتبطة به.", "en": "Add the place name and its story." }, "documented": false },
+    { "id": "branch1", "x": 62, "y": 55, "label": { "ar": "استقرار أحد الفروع", "en": "Where a Branch Settled" }, "description": { "ar": "شاركنا أين استقر هذا الفرع من العائلة.", "en": "Tell us where this branch of the family settled." }, "documented": false },
+    { "id": "branch2", "x": 74, "y": 30, "label": { "ar": "استقرار فرع آخر", "en": "Where Another Branch Settled" }, "description": { "ar": "معلومة قابلة للإضافة عبر صفحة الاقتراحات.", "en": "This information can be added via the Suggestions page." }, "documented": false }
+  ]
+}

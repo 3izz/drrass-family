@@ -1,0 +1,32 @@
+{
+  "categories": [
+    { "id": "historical", "ar": "تاريخية", "en": "Historical" },
+    { "id": "modern", "ar": "معاصرة", "en": "Modern" },
+    { "id": "weddings", "ar": "أعراس", "en": "Weddings" },
+    { "id": "meetings", "ar": "لقاءات", "en": "Gatherings" },
+    { "id": "children", "ar": "الأطفال", "en": "Children" },
+    { "id": "archive", "ar": "أرشيف", "en": "Archive" }
+  ],
+  "items": [
+    { "id": "g001", "category": "historical", "year": 1935, "title": { "ar": "الديوانية الأولى في بريدة", "en": "The First Majlis in Buraidah" }, "caption": { "ar": "صورة نادرة لديوانية الجد الأكبر", "en": "A rare photo of the founder's majlis" } },
+    { "id": "g002", "category": "historical", "year": 1948, "title": { "ar": "بيت العائلة القديم", "en": "The Old Family House" }, "caption": { "ar": "المنزل الطيني الذي شهد ميلاد الأجيال الأولى", "en": "The mudbrick home that witnessed the first generations" } },
+    { "id": "g003", "category": "historical", "year": 1952, "title": { "ar": "قافلة التجارة إلى الكويت", "en": "The Trade Caravan to Kuwait" }, "caption": { "ar": "رحلة تجارية تاريخية وثّقتها العائلة", "en": "A historic trading journey documented by the family" } },
+    { "id": "g004", "category": "weddings", "year": 1978, "title": { "ar": "زفاف الجيل الثاني", "en": "A Second-Generation Wedding" }, "caption": { "ar": "احتفال الأسرة بعرس أحد الأبناء", "en": "The family celebrating one of the sons' weddings" } },
+    { "id": "g005", "category": "weddings", "year": 2019, "title": { "ar": "عرس معاصر", "en": "A Modern Wedding" }, "caption": { "ar": "لقطة من حفل زفاف حديث لأحد أفراد العائلة", "en": "A shot from a recent family wedding celebration" } },
+    { "id": "g006", "category": "meetings", "year": 2005, "title": { "ar": "اللقاء السنوي للعائلة", "en": "The Annual Family Gathering" }, "caption": { "ar": "اجتماع سنوي يجمع فروع العائلة كافة", "en": "An annual reunion bringing together every branch" } },
+    { "id": "g007", "category": "meetings", "year": 2022, "title": { "ar": "ملتقى الشباب", "en": "The Youth Forum" }, "caption": { "ar": "لقاء لشباب العائلة لمناقشة مستقبل الأسرة", "en": "A forum for the family's youth to discuss its future" } },
+    { "id": "g008", "category": "children", "year": 2021, "title": { "ar": "أطفال العائلة في العيد", "en": "The Family's Children at Eid" }, "caption": { "ar": "فرحة الأطفال في يوم العيد", "en": "Children's joy on Eid day" } },
+    { "id": "g009", "category": "children", "year": 2023, "title": { "ar": "الجيل السادس", "en": "The Sixth Generation" }, "caption": { "ar": "أحدث مواليد العائلة", "en": "The family's newest members" } },
+    { "id": "g010", "category": "modern", "year": 2024, "title": { "ar": "احتفال التخرج", "en": "A Graduation Celebration" }, "caption": { "ar": "تكريم أحد أبناء العائلة بعد التخرج", "en": "Honoring a family member's graduation" } },
+    { "id": "g011", "category": "modern", "year": 2025, "title": { "ar": "مجلس العائلة الرقمي", "en": "The Family's Digital Council" }, "caption": { "ar": "اجتماع افتراضي يربط فروع العائلة حول العالم", "en": "A virtual meeting connecting family branches worldwide" } },
+    { "id": "g012", "category": "archive", "year": 1961, "title": { "ar": "وثيقة الأرض القديمة", "en": "The Old Land Document" }, "caption": { "ar": "من أرشيف العائلة التاريخي", "en": "From the family's historical archive" } },
+    { "id": "g013", "category": "historical", "year": 1958, "title": { "ar": "سوق بريدة القديم", "en": "The Old Buraidah Market" }, "caption": { "ar": "مكان عمل العديد من رجال العائلة", "en": "Where many of the family's men once worked" } },
+    { "id": "g014", "category": "weddings", "year": 1995, "title": { "ar": "حفل الزفاف الجماعي", "en": "A Joint Wedding Celebration" }, "caption": { "ar": "احتفال جمع بين مناسبتين للعائلة", "en": "A celebration combining two family occasions" } },
+    { "id": "g015", "category": "meetings", "year": 1990, "title": { "ar": "زيارة الجد الأكبر", "en": "Visiting the Grand Patriarch" }, "caption": { "ar": "لقاء الأحفاد بجدهم الأكبر", "en": "Grandchildren visiting their great-grandfather" } },
+    { "id": "g016", "category": "children", "year": 2018, "title": { "ar": "يوم رياضي عائلي", "en": "A Family Sports Day" }, "caption": { "ar": "نشاط ترفيهي لأطفال العائلة", "en": "A fun activity day for the family's children" } },
+    { "id": "g017", "category": "modern", "year": 2023, "title": { "ar": "افتتاح مشروع العائلة", "en": "Opening the Family Project" }, "caption": { "ar": "احتفال بافتتاح مبادرة خيرية للعائلة", "en": "Celebrating the launch of a family charitable initiative" } },
+    { "id": "g018", "category": "archive", "year": 1970, "title": { "ar": "سجل الأنساب اليدوي", "en": "The Handwritten Lineage Register" }, "caption": { "ar": "أول توثيق مكتوب لشجرة العائلة", "en": "The first written record of the family tree" } },
+    { "id": "g019", "category": "historical", "year": 1943, "title": { "ar": "رحلة الحج", "en": "The Hajj Journey" }, "caption": { "ar": "توثيق نادر لرحلة حج تاريخية", "en": "A rare record of a historic Hajj journey" } },
+    { "id": "g020", "category": "modern", "year": 2026, "title": { "ar": "إطلاق المنصة الرقمية", "en": "Launching the Digital Platform" }, "caption": { "ar": "لحظة إطلاق موقع عائلة الدّراس", "en": "The launch moment of the Al-Drrass family website" } }
+  ]
+}
