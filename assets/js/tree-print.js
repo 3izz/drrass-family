@@ -25,11 +25,15 @@
 
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
-  // Poster is 400x200 "cm" — the <svg viewBox> is 1 unit = 1cm exactly.
-  const W = 400, H = 200;
-  const MARGIN_X = 10;
-  const HEADER_H = 30;   // roots + cracked earth + title live in here
-  const FOOTER_H = 11;
+  // Poster is 600x260 "cm" — the <svg viewBox> is 1 unit = 1cm exactly.
+  // (Sized for legibility, not just to fit: 395 real names in readable
+  // horizontal text need real physical room — this isn't negotiable the
+  // way a decorative flourish would be. Still pure vector, so it prints
+  // cleanly at any smaller size too if 6x2.6m isn't practical.)
+  const W = 600, H = 260;
+  const MARGIN_X = 15;
+  const HEADER_H = 40;   // roots + cracked earth + title live in here
+  const FOOTER_H = 15;
 
   // ---- seeded PRNG (deterministic per node id, so re-renders are stable) ----
   function hashStr(s) {
@@ -125,7 +129,7 @@
       const rng = rngFor(m.id, 'pos');
       const baseX = MARGIN_X + (slotX.get(m.id) / totalWeight) * usableW;
       const baseY = HEADER_H + ((m.generation || 1) - 0.5) * rowH;
-      const jitterX = (rng() - 0.5) * Math.min(1.1, (usableW / totalWeight) * 0.35);
+      const jitterX = (rng() - 0.5) * Math.min(1.8, (usableW / totalWeight) * 0.35);
       const jitterY = (rng() - 0.5) * rowH * 0.3;
       pos.set(m.id, { x: baseX + jitterX, y: baseY + jitterY });
     });
@@ -181,7 +185,7 @@
     // ================= branch geometry helpers =================
     function branchWidth(id) {
       const w = Math.sqrt(descCount.get(id) / maxDesc);
-      return 0.12 + w * 3.2;
+      return 0.2 + w * 5.2;
     }
     function tintFor(m) {
       if (m.id === rootId) return 'gold';
@@ -215,12 +219,12 @@
       gBranches.appendChild(path);
 
       // occasional bark crack texture on thicker branches
-      if (wParent > 1.3 && rng() > 0.4) {
+      if (wParent > 2 && rng() > 0.4) {
         const cx = (parentPos.x + childPos.x) / 2 + (rng() - 0.5) * len * 0.3;
-        const cy = (parentPos.y + childPos.y) / 2 + (rng() - 0.5) * 3;
+        const cy = (parentPos.y + childPos.y) / 2 + (rng() - 0.5) * 4.5;
         const crack = el('path', {
-          d: `M${cx - 1.5},${cy - 1} Q${cx + (rng() - 0.5) * 2},${cy} ${cx + 1.5},${cy + 1.2}`,
-          stroke: BARK.dark, 'stroke-width': 0.05, fill: 'none', opacity: 0.35,
+          d: `M${cx - 2.2},${cy - 1.5} Q${cx + (rng() - 0.5) * 3},${cy} ${cx + 2.2},${cy + 1.8}`,
+          stroke: BARK.dark, 'stroke-width': 0.08, fill: 'none', opacity: 0.35,
         });
         gBranches.appendChild(crack);
       }
@@ -228,9 +232,9 @@
 
     function drawLeaf(x, y, seed) {
       const rng = rngFor(seed, 'leaf' + x.toFixed(1) + y.toFixed(1));
-      const scale = 0.55 + rng() * 0.6;
+      const scale = 0.85 + rng() * 0.9;
       const rot = rng() * 360;
-      const lx = 1.1 * scale, ly = 0.4 * scale;
+      const lx = 1.6 * scale, ly = 0.58 * scale;
       const tint = rng() > 0.5 ? OLIVE_BRANCH_TINT.b0[0] : OLIVE_BRANCH_TINT.b1[0];
       const leaf = el('path', {
         d: `M${-lx},0 Q0,${-ly} ${lx},0 Q0,${ly} ${-lx},0 Z`,
@@ -274,7 +278,7 @@
       const endY = HEADER_H * 0.28 + rng() * 6;
       const c1x = founderPos.x + spread * 0.3, c1y = rootsBaseY - (rootsBaseY - endY) * 0.3;
       const c2x = endX - spread * 0.2, c2y = endY + (rootsBaseY - endY) * 0.35;
-      const w0 = 0.9 + rng() * 0.5, w1 = 0.08;
+      const w0 = 1.5 + rng() * 0.8, w1 = 0.14;
       drawBranch(
         { x: founderPos.x, y: rootsBaseY },
         { x: endX, y: endY },
@@ -291,7 +295,7 @@
     gChrome.appendChild(el('path', { d: crackD, stroke: BARK.dark, 'stroke-width': 0.18, fill: 'none', opacity: 0.3, 'stroke-linecap': 'round' }));
 
     // trunk from earth crack down to founder olive
-    drawBranch({ x: founderPos.x, y: crackY }, founderPos, 3.6, 3.6, rootId + 'trunk');
+    drawBranch({ x: founderPos.x, y: crackY }, founderPos, 5.8, 5.8, rootId + 'trunk');
 
     // Attach all layer groups to the live SVG now (even though gOlives/
     // gChrome are still empty) so their fixed paint order (branches below
@@ -313,8 +317,8 @@
       const p = pos.get(m.id);
       const isRoot = m.id === rootId;
       const rng = rngFor(m.id, 'olive');
-      const rx = isRoot ? 3.1 : 0.95 + rng() * 0.35;
-      const ry = isRoot ? 1.3 : 0.34 + rng() * 0.08;
+      const rx = isRoot ? 5 : 1.55 + rng() * 0.55;
+      const ry = isRoot ? 2.05 : 0.56 + rng() * 0.13;
       const rot = isRoot ? 0 : (rng() - 0.5) * 10;
 
       const g = el('g', { transform: `translate(${p.x},${p.y}) rotate(${rot})`, filter: 'url(#softShadow)' });
@@ -322,7 +326,7 @@
         d: ellipseOlivePath(rx, ry),
         fill: `url(#olive-${isRoot ? 'gold' : tintFor(m)})`,
         stroke: isRoot ? GOLD.dark : '#2b2013',
-        'stroke-width': isRoot ? 0.08 : 0.035,
+        'stroke-width': isRoot ? 0.13 : 0.055,
         'stroke-opacity': isRoot ? 1 : 0.4,
       });
       g.appendChild(shape);
@@ -335,7 +339,7 @@
         x: 0, y: 0, 'text-anchor': 'middle', 'dominant-baseline': 'central', direction: 'rtl',
         'font-family': 'Cairo, sans-serif',
         'font-weight': isRoot ? 900 : 700,
-        'font-size': isRoot ? 1.15 : 0.32,
+        'font-size': isRoot ? 1.9 : 0.54,
         fill: isRoot ? '#2b1e08' : '#fbf7ea',
         transform: `rotate(${-rot})`,
       });
@@ -359,15 +363,15 @@
     // ================= header (title over the roots) =================
     const title = el('text', {
       x: W / 2, y: HEADER_H * 0.5, 'text-anchor': 'middle', direction: 'rtl',
-      'font-family': 'Cairo, sans-serif', 'font-weight': 900, 'font-size': 6.5, fill: '#2b2013',
+      'font-family': 'Cairo, sans-serif', 'font-weight': 900, 'font-size': 10, fill: '#2b2013',
     });
     title.textContent = 'شجرة عائلة الدّراس';
     gChrome.appendChild(title);
 
     const alive = members.filter((mm) => mm.alive).length;
     const subtitle = el('text', {
-      x: W / 2, y: HEADER_H * 0.5 + 4.4, 'text-anchor': 'middle', direction: 'rtl',
-      'font-family': 'Cairo, sans-serif', 'font-weight': 500, 'font-size': 1.7, fill: '#6b5a3a',
+      x: W / 2, y: HEADER_H * 0.5 + 6.2, 'text-anchor': 'middle', direction: 'rtl',
+      'font-family': 'Cairo, sans-serif', 'font-weight': 500, 'font-size': 2.6, fill: '#6b5a3a',
     });
     subtitle.textContent = `${members.length} فردًا عبر ${maxGen} أجيال — ${alive} على قيد الحياة`;
     gChrome.appendChild(subtitle);
@@ -384,30 +388,30 @@
     // landed and shift from there, which is correct by construction.
     const legendEls = legendItems.map(([label, key]) => {
       const t = el('text', {
-        x: 0, y: HEADER_H * 0.5 + 7.9, 'font-family': 'Cairo, sans-serif', 'font-size': 1.3, fill: '#2b2013',
+        x: 0, y: HEADER_H * 0.5 + 11, 'font-family': 'Cairo, sans-serif', 'font-size': 2, fill: '#2b2013',
       });
       t.textContent = label;
       gChrome.appendChild(t);
       const bbox = t.getBBox();
       return { t, key, bbox };
     });
-    const gap = 1.6, itemGap = 3;
-    const totalW = legendEls.reduce((s, it) => s + 1.3 + gap + it.bbox.width, 0) + itemGap * (legendEls.length - 1);
+    const dotR = 0.85, gap = 2.4, itemGap = 4.5;
+    const totalW = legendEls.reduce((s, it) => s + dotR * 2 + gap + it.bbox.width, 0) + itemGap * (legendEls.length - 1);
     let lx = W / 2 - totalW / 2;
     legendEls.forEach(({ t, key, bbox }) => {
-      gChrome.appendChild(el('circle', { cx: lx + 0.55, cy: HEADER_H * 0.5 + 7.6, r: 0.55, fill: `url(#olive-${key})`, stroke: '#2b2013', 'stroke-width': 0.04, 'stroke-opacity': 0.35 }));
-      const desiredLeft = lx + 1.3 + gap;
+      gChrome.appendChild(el('circle', { cx: lx + dotR, cy: HEADER_H * 0.5 + 10.5, r: dotR, fill: `url(#olive-${key})`, stroke: '#2b2013', 'stroke-width': 0.06, 'stroke-opacity': 0.35 }));
+      const desiredLeft = lx + dotR * 2 + gap;
       t.setAttribute('x', desiredLeft - bbox.x);
-      lx += 1.3 + gap + bbox.width + itemGap;
+      lx += dotR * 2 + gap + bbox.width + itemGap;
     });
 
     // footer
     const footerY = H - FOOTER_H * 0.5;
     gChrome.appendChild(el('line', { x1: MARGIN_X, y1: H - FOOTER_H, x2: W - MARGIN_X, y2: H - FOOTER_H, stroke: '#2b2013', 'stroke-opacity': 0.15, 'stroke-width': 0.1 }));
-    const foot1 = el('text', { x: W - MARGIN_X, y: footerY - 1.2, 'text-anchor': 'end', direction: 'rtl', 'font-family': 'Cairo, sans-serif', 'font-weight': 700, 'font-size': 1.5, fill: '#2b2013' });
+    const foot1 = el('text', { x: W - MARGIN_X, y: footerY - 1.8, 'text-anchor': 'end', direction: 'rtl', 'font-family': 'Cairo, sans-serif', 'font-weight': 700, 'font-size': 2.3, fill: '#2b2013' });
     foot1.textContent = 'الدّراس — من جذورٍ راسخة... نبني أجيالًا واعدة.';
     gChrome.appendChild(foot1);
-    const foot2 = el('text', { x: W - MARGIN_X, y: footerY + 1.4, 'text-anchor': 'end', direction: 'rtl', 'font-family': 'Cairo, sans-serif', 'font-size': 1.2, fill: '#6b5a3a' });
+    const foot2 = el('text', { x: W - MARGIN_X, y: footerY + 2.1, 'text-anchor': 'end', direction: 'rtl', 'font-family': 'Cairo, sans-serif', 'font-size': 1.8, fill: '#6b5a3a' });
     foot2.textContent = 'تم إنشاؤها بتاريخ ' + new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
     gChrome.appendChild(foot2);
 

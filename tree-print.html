@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script>(function(){try{var t=localStorage.getItem("drrass:theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>شجرة الزيتون العائلية للطباعة (400×200 سم) | الدّراس</title>
+<title>شجرة الزيتون العائلية للطباعة (600×260 سم) | الدّراس</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
      we shrink it with `zoom` (not transform: scale), because zoom
      actually reduces the element's layout footprint, so the scroll
      container sizes itself to the shrunk poster instead of the full
-     unscaled 400cm canvas. */
+     unscaled 600cm canvas. */
   #poster-wrapper {
     flex-shrink: 0;
     box-shadow: 0 40px 100px rgba(0,0,0,0.4);
@@ -47,11 +47,11 @@
   }
   /* base.css sets `svg { max-width: 100% }` globally for responsive
      content images — wrong here, this SVG's whole point is to BE exactly
-     400cm regardless of its container. */
-  #poster { display: block; max-width: none; width: 400cm; height: 200cm; }
+     600cm regardless of its container. */
+  #poster { display: block; max-width: none; width: 600cm; height: 260cm; }
 
   @media print {
-    @page { size: 400cm 200cm; margin: 0; }
+    @page { size: 600cm 260cm; margin: 0; }
     .print-toolbar { display: none !important; }
     .poster-scroll { padding: 0; overflow: visible; display: block; }
     #poster-wrapper { zoom: 1 !important; box-shadow: none; }
@@ -62,8 +62,8 @@
 
 <div class="print-toolbar">
   <div class="print-toolbar__note">
-    <strong>ملاحظة للطباعة:</strong> هذا التصميم مُعدّ ليُطبع بمقاس <strong>400 × 200 سم (4 × 2 متر) أفقي</strong> بالضبط
-    (يعمل أيضًا بجودة كاملة عند 300×150 أو 200×100 سم لأنه تصميم متجهي (Vector) بالكامل).
+    <strong>ملاحظة للطباعة:</strong> هذا التصميم مُعدّ ليُطبع بمقاس <strong>600 × 260 سم (6 × 2.6 متر تقريبًا) أفقي</strong> بالضبط
+    (يعمل أيضًا بجودة كاملة عند 400×175 أو 300×130 أو 200×87 سم لأنه تصميم متجهي (Vector) بالكامل).
     عند التوجّه لمطبعة، أخبرهم بالمقاس الذي اخترته — الملف متجهي فلا يفقد الجودة عند التكبير أو التصغير.
   </div>
   <div style="display:flex; gap:0.75rem; align-items:center;">
@@ -74,7 +74,7 @@
 
 <div class="poster-scroll">
   <div id="poster-wrapper">
-    <svg id="poster" xmlns="http://www.w3.org/2000/svg" width="400cm" height="200cm" viewBox="0 0 400 200"></svg>
+    <svg id="poster" xmlns="http://www.w3.org/2000/svg" width="600cm" height="260cm" viewBox="0 0 600 260"></svg>
   </div>
 </div>
 
