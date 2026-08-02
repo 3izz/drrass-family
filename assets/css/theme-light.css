@@ -1,0 +1,97 @@
+/* ==========================================================================
+   الدّراس — Light "Heritage" Theme
+   Activated via <html data-theme="light">. Overrides the semantic tokens
+   (see variables.css) plus a handful of hardcoded dark colors that
+   couldn't be themed through variables alone (hero gradients, glass
+   panels, etc.) — everything else inherits automatically since the rest
+   of the site is built on the semantic layer.
+   ========================================================================== */
+
+:root[data-theme="light"] {
+  --bg-primary: #faf5e8;
+  --bg-secondary: #f2e9d1;
+  --bg-panel: #ecdfc0;
+  --bg-light: #e4d5ac;
+
+  --text-on-dark: #2b2013;
+  --text-on-dark-soft: rgba(43, 32, 19, 0.72);
+  --text-on-light: #2b2013;
+  --color-ink-soft: rgba(43, 32, 19, 0.72);
+  --color-ink-faint: rgba(43, 32, 19, 0.5);
+
+  --accent-gold: #8f6d24;
+  --accent-gold-bright: #a97d1f;
+
+  --border-on-dark: rgba(43, 32, 19, 0.14);
+  --border-on-light: rgba(43, 32, 19, 0.14);
+
+  --gradient-navy: linear-gradient(160deg, #f2e9d1 0%, #e4d5ac 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(250, 245, 232, 0.2) 0%, rgba(250, 245, 232, 0.88) 78%, rgba(250, 245, 232, 1) 100%);
+
+  --shadow-soft: 0 20px 60px rgba(80, 60, 20, 0.16);
+}
+
+/* ---- Header ---- */
+:root[data-theme="light"] .site-header {
+  background: linear-gradient(180deg, rgba(250, 245, 232, 0.8), transparent);
+}
+:root[data-theme="light"] .site-header.is-scrolled {
+  background: rgba(250, 245, 232, 0.9);
+  box-shadow: 0 10px 30px rgba(80, 60, 20, 0.12);
+}
+
+/* ---- Hero ---- */
+:root[data-theme="light"] .hero__bg {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(180, 148, 90, 0.22), transparent 55%),
+    radial-gradient(ellipse at 75% 80%, rgba(200, 162, 77, 0.16), transparent 50%),
+    linear-gradient(160deg, #faf5e8 0%, #f2e9d1 45%, #ecdfc0 100%);
+}
+:root[data-theme="light"] .hero__title {
+  background: linear-gradient(100deg, #2b2013 20%, var(--color-gold-700) 50%, #2b2013 80%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+:root[data-theme="light"] .hero__crest::before { border-color: rgba(143, 109, 36, 0.35); }
+
+/* ---- Memorial hero (Deaths page) ---- */
+:root[data-theme="light"] .memorial-hero {
+  background: linear-gradient(160deg, #f5efdd, #eee3cc);
+}
+
+/* ---- Tree page ---- */
+:root[data-theme="light"] .tree-toolbar { background: rgba(250, 245, 232, 0.85); }
+:root[data-theme="light"] .tree-toolbar__select { background: rgba(43, 32, 19, 0.04); }
+:root[data-theme="light"] .tree-minimap { background: rgba(250, 245, 232, 0.92); }
+:root[data-theme="light"] .tree-zoom-controls button { background: rgba(250, 245, 232, 0.92); }
+:root[data-theme="light"] .tree-node {
+  background: linear-gradient(160deg, rgba(255,255,255,0.9), rgba(236,223,192,0.9));
+  border-color: rgba(43, 32, 19, 0.16);
+}
+:root[data-theme="light"] .tree-node__avatar { border-color: var(--color-gold-700); }
+
+/* ---- Cards / glass surfaces ---- */
+:root[data-theme="light"] .card {
+  background: linear-gradient(160deg, rgba(43, 32, 19, 0.045), rgba(43, 32, 19, 0.015));
+}
+:root[data-theme="light"] .card--glass {
+  background: rgba(250, 245, 232, 0.6);
+  border-color: rgba(143, 109, 36, 0.2);
+}
+
+/* ---- Forms ---- */
+:root[data-theme="light"] .form-field input,
+:root[data-theme="light"] .form-field select,
+:root[data-theme="light"] .form-field textarea,
+:root[data-theme="light"] .search-box input {
+  background: rgba(43, 32, 19, 0.035);
+}
+
+/* ---- Loading skeleton shimmer ---- */
+:root[data-theme="light"] .skeleton {
+  background: linear-gradient(90deg, rgba(43, 32, 19, 0.04) 25%, rgba(43, 32, 19, 0.09) 37%, rgba(43, 32, 19, 0.04) 63%);
+}
+
+/* ---- Pattern overlay (slightly stronger so it still reads on a light surface) ---- */
+:root[data-theme="light"] .pattern-bg { opacity: 0.07; }

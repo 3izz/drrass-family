@@ -103,7 +103,7 @@
   width: 14px; height: 14px;
   border-radius: 50%;
   background: var(--gradient-gold);
-  box-shadow: 0 0 0 4px var(--color-navy-950), 0 0 0 5px var(--border-on-dark);
+  box-shadow: 0 0 0 4px var(--bg-primary), 0 0 0 5px var(--border-on-dark);
 }
 .timeline__item:nth-child(odd) .timeline__dot { inset-inline-end: -7px; }
 .timeline__item:nth-child(even) .timeline__dot { inset-inline-start: -7px; }
@@ -272,7 +272,7 @@
 .search-box svg { position: absolute; inset-inline-start: 1.1rem; top: 50%; transform: translateY(-50%); opacity: 0.6; }
 .search-results {
   position: absolute; top: calc(100% + 8px); inset-inline: 0;
-  background: var(--color-navy-800);
+  background: var(--bg-panel);
   border: 1px solid var(--border-on-dark);
   border-radius: var(--radius-md);
   max-height: 340px; overflow-y: auto;
@@ -338,7 +338,7 @@
 .toast {
   position: fixed; bottom: var(--space-md); inset-inline-start: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--color-navy-800); border: 1px solid var(--accent-gold);
+  background: var(--bg-panel); border: 1px solid var(--accent-gold);
   padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full);
   opacity: 0; visibility: hidden; transition: all var(--dur-fast) var(--ease-smooth);
   z-index: 3100;

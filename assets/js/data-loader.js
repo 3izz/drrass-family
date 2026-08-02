@@ -9,7 +9,7 @@
 
   async function loadJSON(path) {
     if (cache.has(path)) return cache.get(path);
-    const promise = fetch(path, { cache: 'force-cache' })
+    const promise = fetch(path, { cache: 'no-cache' })
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load ' + path);
         return res.json();

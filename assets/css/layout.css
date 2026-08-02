@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-md);
-  background: var(--color-navy-950);
+  background: var(--bg-primary);
   transition: opacity 0.7s var(--ease-luxury), visibility 0.7s var(--ease-luxury);
 }
 .loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -104,12 +104,12 @@
 .main-nav__list {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   flex-wrap: nowrap;
 }
 .main-nav__link {
   position: relative;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   padding: var(--space-2xs) var(--space-3xs);
   color: var(--text-on-dark-soft);
   transition: color var(--dur-fast) var(--ease-smooth);
@@ -129,7 +129,7 @@
 .main-nav__link:hover::after, .main-nav__link.is-active::after { transform: scaleX(1); }
 .main-nav__link.is-active { color: var(--accent-gold-bright); }
 
-.header-actions { display: flex; align-items: center; gap: var(--space-sm); }
+.header-actions { display: flex; align-items: center; gap: 0.6rem; }
 .lang-switch {
   display: flex;
   border: 1px solid var(--border-on-dark);
@@ -144,6 +144,21 @@
   transition: all var(--dur-fast) var(--ease-smooth);
 }
 .lang-switch__btn.is-active { background: var(--gradient-gold); color: var(--color-navy-950); font-weight: 700; }
+
+.theme-toggle {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-on-dark);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-on-dark);
+  transition: all var(--dur-fast) var(--ease-smooth);
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent-gold); color: var(--accent-gold-bright); }
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: block; }
 
 .nav-toggle {
   display: none;
@@ -160,13 +175,13 @@
 .nav-toggle.is-active span:nth-child(2) { opacity: 0; }
 .nav-toggle.is-active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-@media (max-width: 1180px) {
+@media (max-width: 1360px) {
   .main-nav {
     position: fixed;
     inset-block: 0;
     inset-inline-end: 0;
     width: min(360px, 84vw);
-    background: var(--color-navy-900);
+    background: var(--bg-secondary);
     border-inline-start: 1px solid var(--border-on-dark);
     flex-direction: column;
     align-items: stretch;
@@ -206,7 +221,7 @@
 
 /* ---- Footer ---- */
 .site-footer {
-  background: var(--color-navy-950);
+  background: var(--bg-primary);
   border-top: 1px solid var(--border-on-dark);
   padding-block: var(--space-2xl) var(--space-lg);
   position: relative;

@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--color-navy-950);
+  background: var(--bg-primary);
 }
 .hero__bg {
   position: absolute; inset: 0;
@@ -127,7 +127,7 @@ img.lazy-img.is-loaded { opacity: 1; }
 
 /* Page transition veil */
 .page-veil {
-  position: fixed; inset: 0; background: var(--color-navy-950); z-index: 4000;
+  position: fixed; inset: 0; background: var(--bg-primary); z-index: 4000;
   transform: scaleY(0); transform-origin: bottom;
   pointer-events: none;
 }

@@ -18,6 +18,16 @@
     const introEl = document.getElementById('origin-intro');
     if (introEl) introEl.textContent = data.intro[L];
 
+    const sourceEl = document.getElementById('origin-source');
+    if (sourceEl && data.source) {
+      sourceEl.innerHTML = `${L === 'ar' ? 'المصدر' : 'Source'}: <a href="${data.source.url}" target="_blank" rel="noopener noreferrer" class="text-gold">${data.source.label[L]}</a>`;
+    }
+
+    const disambigEl = document.getElementById('origin-disambiguation');
+    if (disambigEl && data.disambiguation) {
+      disambigEl.textContent = data.disambiguation[L];
+    }
+
     const pinContainer = document.getElementById('map-pins');
     if (pinContainer) {
       pinContainer.innerHTML = '';
@@ -64,6 +74,7 @@
             ${loc.year ? `<span class="tag ltr-nums">${loc.year}</span>` : ''}
           </div>
           <p class="text-muted" style="margin-block-start:0.5rem;">${loc.description[L]}</p>
+          ${loc.sourced ? `<p style="margin-block-start:0.6rem;font-size:0.78rem;"><a href="${data.source.url}" target="_blank" rel="noopener noreferrer" class="text-gold">✓ ${L === 'ar' ? 'موثّق — مشروع هوية' : 'Sourced — Hawiya Project'}</a></p>` : ''}
           ${!loc.documented ? `<a href="suggestions.html" class="btn btn--outline btn--sm" style="margin-block-start:1rem;">${L === 'ar' ? 'أضف هذه المعلومة' : 'Add this information'}</a>` : ''}
         </div>`).join('');
       grid.querySelectorAll('img').forEach((img) => img.classList.add('is-loaded'));

@@ -1,43 +1,73 @@
 {
   "intro": {
-    "ar": "تعود جذور عائلة الدّراس إلى قرية الولجة الفلسطينية، حيث يُذكر أفراد من العائلة باسم «الدّراس» في إحصاء الدولة العثمانية للقرية عام 1872. مع مطلع القرن العشرين، هاجر أحد أبناء فرع هدهد إلى تشيلي عام 1918 واستقر في سانتياغو. هذه الخريطة توثّق ما هو معروف حتى الآن، وتبقى مفتوحة لإضافة محطات هجرة أخرى من مختلف فروع العائلة.",
-    "en": "The Al-Drrass family traces its roots to the Palestinian village of Al-Walaja, where family members are recorded under the name \"Al-Drrass\" in the Ottoman-era census of the village in 1872. At the turn of the 20th century, a member of the Hudhud branch emigrated to Chile in 1918 and settled in Santiago. This map documents what is known so far and remains open for other branches' migration stories to be added."
+    "ar": "عائلة الدّراس من العائلات الفلسطينية المعروفة، وتتركز أصولها وجذورها التاريخية بشكل رئيسي في قرية الولجة التابعة لمحافظة القدس الشريف، وفقًا لتوثيق «هوية» — المشروع الوطني للحفاظ على الجذور الفلسطينية. ويذكر إحصاء الدولة العثمانية لقرية الولجة عام 1872 ثلاثة من الأجداد المباشرين باسم «الدّراس»، ما يؤكد امتداد الشجرة المسجّلة اليوم جيلاً بجيل. يتوزع أبناء العائلة حاليًا بين الضفة الغربية والقدس والأردن بشكل رئيسي، إضافة إلى أفراد هاجروا إلى بلدان أخرى مثل تشيلي في مطلع القرن العشرين.",
+    "en": "Al-Drrass is a well-known Palestinian family whose historical roots are centered mainly in the village of Al-Walaja in the Jerusalem governorate, according to \"Hawiya\" — the national project for preserving Palestinian roots. The 1872 Ottoman-era census of Al-Walaja records three direct ancestors under the name \"Al-Drrass,\" confirming the generation-by-generation lineage recorded in the tree today. Family members today are spread mainly across the West Bank and Jerusalem and Jordan, in addition to individuals who emigrated to other countries such as Chile in the early 20th century."
   },
+  "disambiguation": {
+    "ar": "تنويه: تُنسب عائلة الدّراس كاسم عائلة مستقل إلى قرية الولجة، ويجب عدم الخلط بينها وبين المنتسبين إلى قرية بيت درّاس المهجّرة في قضاء غزة، الذين يُعرفون بلقب «الدراسي» وينحدرون من حمائل أخرى كبارود والمقادمة وأبو شمالة وعابد.",
+    "en": "Note: Al-Drrass, as an independent family name, is attributed to the village of Al-Walaja and should not be confused with those descending from the depopulated village of Bayt Daras in the Gaza district, who are known by the surname \"Al-Darasi\" and descend from different clans such as Baroud, Al-Muqadama, Abu Shamala, and Abed."
+  },
+  "source": { "label": { "ar": "مشروع هوية — الجذور الفلسطينية", "en": "Hawiya Project — Palestinian Roots" }, "url": "https://howiyya.com/Tree?Id=21969" },
   "locations": [
     {
       "id": "walaja",
-      "x": 26,
-      "y": 42,
+      "x": 24,
+      "y": 40,
       "year": 1872,
-      "label": { "ar": "الولجة، فلسطين", "en": "Al-Walaja, Palestine" },
+      "label": { "ar": "الولجة، القدس", "en": "Al-Walaja, Jerusalem" },
       "description": {
-        "ar": "الموطن الأصلي للعائلة. يظهر ثلاثة من الأجداد المباشرين — حسين ومحمود ابنا محمد بن مصطفى، وعبد القادر بن محمود — باسم «الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872، وتؤكد هذه الأسماء الثلاثة نسب الشجرة المسجّلة اليوم جيلاً بجيل.",
-        "en": "The family's ancestral homeland. Three direct ancestors — Hussein and Mahmoud, sons of Mohammad son of Mustafa, and Abdul Qader son of Mahmoud — appear under the name \"Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja, independently confirming the tree's recorded lineage generation by generation."
+        "ar": "الموطن الأصلي والجذر التاريخي للعائلة. يظهر ثلاثة من الأجداد المباشرين — حسين ومحمود ابنا محمد بن مصطفى، وعبد القادر بن محمود — باسم «الدّراس» في إحصاء الدولة العثمانية لقرية الولجة عام 1872.",
+        "en": "The family's ancestral homeland and historical root. Three direct ancestors — Hussein and Mahmoud, sons of Mohammad son of Mustafa, and Abdul Qader son of Mahmoud — appear under the name \"Al-Drrass\" in the 1872 Ottoman-era census of Al-Walaja."
       },
       "documented": true,
+      "sourced": true,
       "image": "assets/images/historical-walaja-village-1936.jpg"
     },
     {
+      "id": "westbank",
+      "x": 40,
+      "y": 30,
+      "label": { "ar": "الضفة الغربية والقدس", "en": "West Bank & Jerusalem" },
+      "description": {
+        "ar": "التواجد الرئيسي لأبناء العائلة اليوم، وفقًا لتوثيق مشروع هوية للجذور الفلسطينية.",
+        "en": "The main present-day presence of the family, according to the Hawiya Palestinian roots documentation project."
+      },
+      "documented": true,
+      "sourced": true
+    },
+    {
+      "id": "jordan",
+      "x": 56,
+      "y": 44,
+      "label": { "ar": "الأردن", "en": "Jordan" },
+      "description": {
+        "ar": "أحد المناطق الرئيسية لتواجد فروع وأفراد من العائلة خارج فلسطين.",
+        "en": "One of the main areas where branches and individuals of the family are present outside Palestine."
+      },
+      "documented": true,
+      "sourced": true
+    },
+    {
       "id": "chile",
-      "x": 68,
-      "y": 63,
+      "x": 78,
+      "y": 66,
       "year": 1918,
       "label": { "ar": "سانتياغو، تشيلي", "en": "Santiago, Chile" },
       "description": {
-        "ar": "هاجر أحمد محمد حمدان (من فرع هدهد) إلى تشيلي عام 1918 واستقر في سانتياغو. لا تزال لافتة «Casa Darras» قائمة على أرضه هناك حتى اليوم، شاهدة على هذه الرحلة.",
-        "en": "Ahmad Mohammad Hamdan (of the Hudhud branch) emigrated to Chile in 1918 and settled in Santiago. A \"Casa Darras\" sign still stands on his land there today, a lasting witness to that journey."
+        "ar": "قصة فرد واحد موثّقة بالصورة، لا تمثّل المسار العام للعائلة: هاجر أحمد محمد حمدان (من فرع هدهد) إلى تشيلي عام 1918 واستقر في سانتياغو، ولا تزال لافتة «Casa Darras» قائمة على أرضه هناك حتى اليوم.",
+        "en": "A single, photo-documented individual's story — not representative of the family's general path: Ahmad Mohammad Hamdan (of the Hudhud branch) emigrated to Chile in 1918 and settled in Santiago. A \"Casa Darras\" sign still stands on his land there today."
       },
       "documented": true,
       "image": "assets/images/historical-casa-darras-chile-1918.jpg"
     },
     {
       "id": "other-branches",
-      "x": 45,
-      "y": 25,
-      "label": { "ar": "فروع أخرى؟", "en": "Other branches?" },
+      "x": 30,
+      "y": 60,
+      "label": { "ar": "تفاصيل أخرى؟", "en": "More details?" },
       "description": {
-        "ar": "مسار فرع مصطفى وبقية فروع العائلة بعد الولجة لم يُوثَّق بعد بالكامل.",
-        "en": "The journey of the Mustafa branch and the rest of the family after Al-Walaja hasn't been fully documented yet."
+        "ar": "قصص وفروع أخرى من العائلة، داخل فلسطين أو خارجها، لم تُوثَّق بعد بالكامل.",
+        "en": "Other family stories and branches, inside or outside Palestine, that haven't been fully documented yet."
       },
       "documented": false
     }
