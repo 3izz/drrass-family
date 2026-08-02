@@ -65,7 +65,7 @@
     'tree.compare': { ar: '🔗 حاسبة القرابة', en: '🔗 Kinship Calculator' },
     'tree.expandAll': { ar: 'فتح الكل', en: 'Expand All' },
     'tree.collapseAll': { ar: 'طي الكل', en: 'Collapse All' },
-    'tree.print': { ar: '🖨️ طباعة', en: '🖨️ Print' },
+    'tree.print': { ar: '🖨️ طباعة الشجرة (200×100سم)', en: '🖨️ Print Tree (200×100cm)' },
     'tree.legend.root': { ar: 'الجذر', en: 'Root' },
     'tree.legend.a': { ar: 'اختيار (أ)', en: 'Selection (A)' },
     'tree.legend.b': { ar: 'اختيار (ب)', en: 'Selection (B)' },

@@ -24,18 +24,6 @@
 <link rel="stylesheet" href="assets/css/pages.css">
 <link rel="stylesheet" href="assets/css/rtl.css">
 <link rel="stylesheet" href="assets/css/theme-light.css">
-<style>
-  #print-outline { display: none; }
-  @media print {
-    .site-header, .nav-scrim, .tree-toolbar, .tree-zoom-controls, .tree-minimap,
-    .tree-legend, .relation-viewer, .back-to-top, .modal-overlay, .loader { display: none !important; }
-    .tree-stage { display: none !important; }
-    #print-outline { display: block !important; padding: 2rem; color: #000; }
-    #print-outline ul { padding-inline-start: 1.4rem; }
-    #print-outline li { margin-block: 0.3rem; }
-    body { background: #fff; color: #000; }
-  }
-</style>
 </head>
 <body>
 
@@ -90,7 +78,7 @@
       <button class="btn btn--outline btn--sm" id="compare-toggle" data-i18n="tree.compare">🔗 حاسبة القرابة</button>
       <button class="btn btn--outline btn--sm" id="expand-all-btn" data-i18n="tree.expandAll">فتح الكل</button>
       <button class="btn btn--outline btn--sm" id="collapse-all-btn" data-i18n="tree.collapseAll">طي الكل</button>
-      <button class="btn btn--outline btn--sm" id="print-btn" data-i18n="tree.print">🖨️ طباعة</button>
+      <a class="btn btn--outline btn--sm" href="tree-print.html" target="_blank" rel="noopener" data-i18n="tree.print">🖨️ طباعة الشجرة (200×100سم)</a>
     </div>
   </div>
 
@@ -126,11 +114,6 @@
       </div>
       <button class="icon-btn" id="relation-close" aria-label="إغلاق">✕</button>
     </div>
-  </div>
-
-  <div id="print-outline">
-    <h1>شجرة عائلة الدّراس</h1>
-    <div id="print-outline-content"></div>
   </div>
 </main>
 

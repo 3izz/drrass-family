@@ -57,7 +57,6 @@
     applyUrlParams();
     loadingEl.style.display = 'none';
     render();
-    buildPrintOutline();
   }
 
   function populateBranchFilter() {
@@ -683,22 +682,6 @@
   }
 
   // ---------------------------------------------------------------------
-  // Print outline (nested list — the interactive canvas prints poorly)
-  // ---------------------------------------------------------------------
-  function buildPrintOutline() {
-    const container = document.getElementById('print-outline-content');
-    const L = lang();
-    function renderNode(id) {
-      const m = byId.get(id);
-      const kids = m.children || [];
-      return `<li>${memberLabel(m)}${kids.length ? `<ul>${kids.map(renderNode).join('')}</ul>` : ''}</li>`;
-    }
-    container.innerHTML = `<ul>${renderNode(rootId)}</ul>`;
-  }
-
-  document.getElementById('print-btn').addEventListener('click', () => window.print());
-
-  // ---------------------------------------------------------------------
   // Init
   // ---------------------------------------------------------------------
   loadData();
@@ -706,7 +689,6 @@
     if (!rootId) return; // data still loading — initial loadData() will render once ready
     populateBranchFilter();
     render();
-    buildPrintOutline();
     // the i18n sweep just reset slot-a/slot-b to placeholder text; restore any active selection
     const L = lang();
     if (compareA) slotA.innerHTML = memberChip(compareA, L);

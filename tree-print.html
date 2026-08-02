@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("drrass:theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شجرة العائلة للطباعة (200×100 سم) | الدّراس</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/theme-light.css">
+<style>
+  body { background: var(--bg-secondary); }
+
+  .print-toolbar {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+  .print-toolbar__note {
+    font-size: 0.85rem;
+    color: var(--text-on-dark-soft);
+    max-width: 640px;
+  }
+  .print-toolbar__note strong { color: var(--accent-gold-bright); }
+
+  .poster-scroll {
+    width: 100%;
+    overflow: auto;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* The poster itself is sized in REAL physical cm — exact for print.
+     On screen we shrink it with `zoom` (not transform: scale) because
+     zoom actually reduces the element's layout footprint, so the
+     scroll container sizes itself to the shrunk poster instead of the
+     full unscaled 200cm canvas. */
+  #poster-wrapper {
+    flex-shrink: 0;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  }
+  #poster {
+    position: relative;
+    width: 200cm;
+    height: 100cm;
+    background: #faf5e8;
+    overflow: hidden;
+    font-family: var(--font-ar);
+  }
+  #poster-links { position: absolute; inset: 0; }
+  .p-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .p-node__dot {
+    width: 0.34cm; height: 0.34cm; border-radius: 50%;
+    border: 0.03cm solid #2b2013;
+    flex-shrink: 0;
+  }
+  .p-node__label {
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    font-size: 0.24cm;
+    line-height: 1;
+    color: #2b2013;
+    white-space: nowrap;
+    margin-block-start: 0.08cm;
+    font-weight: 600;
+    letter-spacing: 0.01cm;
+  }
+  .p-node--root .p-node__dot { width: 0.7cm; height: 0.7cm; background: #c8a24d; border-width: 0.05cm; }
+  .p-node--root .p-node__label { font-size: 0.5cm; writing-mode: horizontal-tb; font-weight: 900; margin-block-start: 0.25cm; }
+
+  .p-header {
+    position: absolute; top: 0; left: 0; width: 100%; height: 9cm;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .p-header__title { font-size: 2.4cm; font-weight: 900; color: #2b2013; }
+  .p-header__subtitle { font-size: 0.65cm; color: #6b5a3a; margin-block-start: 0.3cm; }
+  .p-legend { display: flex; gap: 1.2cm; margin-block-start: 0.4cm; }
+  .p-legend__item { display: flex; align-items: center; gap: 0.25cm; font-size: 0.5cm; color: #2b2013; }
+  .p-legend__dot { width: 0.4cm; height: 0.4cm; border-radius: 50%; border: 0.03cm solid #2b2013; }
+
+  .p-footer {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 6.5cm;
+    display: flex; align-items: center; justify-content: space-between;
+    padding-inline: 4cm;
+    border-top: 0.04cm solid rgba(43,32,19,0.25);
+  }
+  .p-footer__text { font-size: 0.42cm; color: #6b5a3a; }
+  .p-footer__text strong { color: #2b2013; }
+  #poster-qr { width: 3.2cm; height: 3.2cm; }
+
+  @media print {
+    @page { size: 200cm 100cm; margin: 0; }
+    .print-toolbar { display: none !important; }
+    .poster-scroll { padding: 0; overflow: visible; display: block; }
+    #poster-wrapper { zoom: 1 !important; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-toolbar">
+  <div class="print-toolbar__note">
+    <strong>ملاحظة للطباعة:</strong> هذا التصميم مُعدّ ليُطبع بمقاس <strong>200 × 100 سم (2 × 1 متر) أفقي</strong> بالضبط.
+    عند التوجّه لمطبعة، اطلب الطباعة بهذا المقاس تحديدًا — التصميم لن يظهر بشكل صحيح بأي مقاس آخر.
+  </div>
+  <div style="display:flex; gap:0.75rem; align-items:center;">
+    <a href="tree.html" class="btn btn--outline btn--sm">↩ العودة للشجرة</a>
+    <button class="btn btn--gold btn--sm" id="do-print">طباعة / حفظ PDF</button>
+  </div>
+</div>
+
+<div class="poster-scroll">
+  <div id="poster-wrapper">
+    <div id="poster">
+      <div class="p-header">
+        <div class="p-header__title">شجرة عائلة الدّراس</div>
+        <div class="p-header__subtitle" id="poster-subtitle">جارٍ التحميل...</div>
+        <div class="p-legend" id="poster-legend"></div>
+      </div>
+      <svg id="poster-links" width="200cm" height="100cm"></svg>
+      <div id="poster-nodes"></div>
+      <div class="p-footer">
+        <div class="p-footer__text"><strong>الدّراس</strong> — من جذورٍ راسخة... نبني أجيالًا واعدة.<br>تم إنشاؤها بتاريخ <span id="poster-date"></span></div>
+        <canvas id="poster-qr"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data-loader.js"></script>
+<script src="assets/js/qrcode.js"></script>
+<script src="assets/js/tree-print.js"></script>
+</body>
+</html>
