@@ -60,17 +60,22 @@
 
     'backToTop': { ar: 'العودة للأعلى', en: 'Back to top' },
 
-    // Tree toolbar
-    'tree.search.placeholder': { ar: 'ابحث بالاسم...', en: 'Search by name...' },
-    'tree.compare': { ar: '🔗 حاسبة القرابة', en: '🔗 Kinship Calculator' },
-    'tree.expandAll': { ar: 'فتح الكل', en: 'Expand All' },
-    'tree.collapseAll': { ar: 'طي الكل', en: 'Collapse All' },
-    'tree.print': { ar: '🖨️ طباعة الشجرة (200×100سم)', en: '🖨️ Print Tree (200×100cm)' },
-    'tree.legend.root': { ar: 'الجذر', en: 'Root' },
-    'tree.legend.a': { ar: 'اختيار (أ)', en: 'Selection (A)' },
-    'tree.legend.b': { ar: 'اختيار (ب)', en: 'Selection (B)' },
-    'tree.slot.first': { ar: 'اختر الفرد الأول', en: 'Select the first person' },
-    'tree.slot.second': { ar: 'اختر الفرد الثاني', en: 'Select the second person' },
+    // Tree page
+    'tree.brand': { ar: 'شجرة الدّراس', en: 'Al-Drrass Tree' },
+    'tree.search.placeholder': { ar: 'ابحث عن فرد بالاسم…', en: 'Search for someone by name…' },
+    'tree.viewingHint': { ar: 'اضغط على أي فرد لعرض تفاصيله', en: 'Tap anyone to see their details' },
+    'tree.focus.full': { ar: 'عرض كامل الشجرة ✕', en: 'Show full tree ✕' },
+    'tree.tools.title': { ar: 'أدوات الشجرة', en: 'Tree tools' },
+    'tree.tools.branch': { ar: 'عرض فرع معيّن', en: 'Show one branch' },
+    'tree.tools.tree': { ar: 'الشجرة', en: 'Tree' },
+    'tree.tools.tools': { ar: 'أدوات', en: 'Tools' },
+    'tree.tools.lang': { ar: 'اللغة', en: 'Language' },
+    'tree.compare': { ar: 'حاسبة صلة القرابة', en: 'Kinship calculator' },
+    'tree.expandAll': { ar: 'فتح كل الفروع', en: 'Expand all branches' },
+    'tree.collapseAll': { ar: 'طيّ الكل', en: 'Collapse all' },
+    'tree.print': { ar: 'طباعة الشجرة كاملة', en: 'Print the full tree' },
+    'tree.slot.first': { ar: 'اختر الفرد الأول', en: 'First person' },
+    'tree.slot.second': { ar: 'اختر الفرد الثاني', en: 'Second person' },
   };
 
   function getLang() {
