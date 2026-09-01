@@ -16,7 +16,14 @@
 :root[data-theme="dark"] .gallery-item { background: var(--surface-3); }
 
 /* Dark mode: keep the historical photos readable, not blinding */
-:root[data-theme="dark"] img.lazy-img { filter: brightness(0.92); }
+:root[data-theme="dark"] img.lazy-img[src$=".jpg"],
+:root[data-theme="dark"] img.lazy-img[src$=".jpeg"],
+:root[data-theme="dark"] img.lazy-img[src$=".png"] { filter: brightness(0.9); }
+
+/* Dark mode: dim the generated (grey) content placeholders so they don't glare */
+:root[data-theme="dark"] img[data-placeholder-kind] {
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.04);
+}
 
 /* Dark mode: header blur ground */
 :root[data-theme="dark"] .site-header {
