@@ -2,7 +2,7 @@
    الدّراس — Base / Reset / Typography
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 [hidden] { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -103,7 +103,8 @@ p { margin: 0; }
 .text-muted { color: var(--text-on-dark-soft); }
 .section--light .text-muted { color: var(--color-ink-soft); }
 
-.text-gold { color: var(--accent-gold-bright); }
+.text-gold { color: var(--accent); }
+a.text-gold { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 3px; }
 
 .gold-underline {
   position: relative;

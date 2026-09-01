@@ -138,7 +138,8 @@
   overflow: hidden;
 }
 .lang-switch__btn {
-  padding: 0.34rem 0.7rem;
+  padding: 0.5rem 0.8rem;
+  min-height: 36px;
   font-size: 0.72rem;
   font-family: var(--font-en);
   color: var(--muted);
@@ -243,9 +244,9 @@
 @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
 
 .footer-brand p { color: var(--muted); margin-block-start: var(--space-sm); max-width: 320px; font-size: var(--fs-small); }
-.footer-col h4 { color: var(--ink); font-size: 0.9rem; margin-block-end: var(--space-sm); letter-spacing: 0.02em; }
-.footer-col ul li { margin-block-end: var(--space-2xs); }
-.footer-col a { color: var(--muted); transition: color var(--dur-fast); font-size: var(--fs-small); }
+.footer-col h4 { color: var(--ink); font-size: 0.9rem; margin-block-end: var(--space-xs); letter-spacing: 0.02em; }
+.footer-col ul li { margin-block-end: 2px; }
+.footer-col a { display: inline-block; padding-block: 5px; color: var(--muted); transition: color var(--dur-fast); font-size: var(--fs-small); }
 .footer-col a:hover { color: var(--ink); }
 
 .social-row { display: flex; gap: var(--space-2xs); margin-block-start: var(--space-sm); }
