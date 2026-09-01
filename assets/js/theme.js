@@ -9,13 +9,16 @@
   const STORAGE_KEY = 'drrass:theme';
 
   function getTheme() {
-    return localStorage.getItem(STORAGE_KEY) || 'dark';
+    return localStorage.getItem(STORAGE_KEY) || 'light';
   }
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#111110' : '#ffffff');
     document.querySelectorAll('.theme-toggle').forEach((btn) => {
-      btn.setAttribute('aria-pressed', theme === 'light');
+      btn.setAttribute('aria-pressed', theme === 'dark');
+      btn.setAttribute('aria-label', theme === 'dark' ? 'التبديل إلى المظهر الفاتح' : 'التبديل إلى المظهر الداكن');
     });
   }
 

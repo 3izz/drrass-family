@@ -1,60 +1,92 @@
 /* ==========================================================================
    الدّراس — Design Tokens
-   Luxury heritage palette: deep navy, dark green, warm beige, gold accent.
+   Identity: white / near-black minimal "family archive".
+   Primary surface is white, text is near-black ink, secondary elements
+   are soft warm greys, borders are hairlines, shadows are barely there.
+   A single restrained warm accent is used sparingly (active state, root
+   marker, historical badge) — never as decoration.
+
+   Legacy token names (--color-navy-*, --accent-gold*, --gradient-*, …) are
+   kept as ALIASES that now point at the neutral palette, so the 14 pages
+   and every component stylesheet inherit the new identity untouched.
    ========================================================================== */
 :root {
-  /* ---- Colors ---- */
-  --color-navy-950: #060d14;
-  --color-navy-900: #0a1622;
-  --color-navy-800: #0f1f2e;
-  --color-navy-700: #16293b;
-  --color-navy-600: #1e3a52;
+  color-scheme: light;
 
-  --color-green-900: #0c2118;
-  --color-green-800: #123527;
-  --color-green-700: #1a4a35;
-  --color-green-600: #235f45;
-  --color-green-500: #2f7a58;
+  /* ---- Core neutral ramp (light / default) ---- */
+  --ink:        #1a1a17;   /* near-black — primary text, primary actions   */
+  --ink-2:      #333330;   /* strong secondary text / icons               */
+  --muted:      #6b6b62;   /* secondary text                              */
+  --faint:      #97968c;   /* tertiary text, meta                         */
+  --hair:       rgba(26, 26, 23, 0.12);   /* hairline border              */
+  --hair-soft:  rgba(26, 26, 23, 0.07);   /* faintest divider             */
+  --hair-strong:rgba(26, 26, 23, 0.24);   /* emphasised border           */
 
-  --color-beige-50: #fbf7ef;
-  --color-beige-100: #f5ecdb;
-  --color-beige-200: #ecdfc0;
-  --color-beige-300: #ddcda0;
+  --surface:    #ffffff;   /* base page                                   */
+  --surface-2:  #f7f6f3;   /* alternating sections                        */
+  --surface-3:  #efeee9;   /* panels, inset areas                         */
+  --surface-4:  #e6e4dd;   /* pressed / active track                      */
 
-  --color-gold-100: #f4e4b8;
-  --color-gold-300: #e6c477;
-  --color-gold-500: #c8a24d;
-  --color-gold-600: #b08a35;
-  --color-gold-700: #8f6d24;
+  /* ---- Single accent (warm bronze) — used sparingly ---- */
+  --accent:       #7c6535;
+  --accent-strong:#5f4d28;
+  --accent-tint:  #f1ece0;
+
+  /* ---- Feedback ---- */
+  --ok:    #2f7d5b;
+  --danger:#b23b3b;
+
+  /* ==== Legacy semantic aliases (do not remove — pages depend on them) ==== */
+  --color-navy-950: var(--surface);
+  --color-navy-900: var(--surface-2);
+  --color-navy-800: var(--surface-3);
+  --color-navy-700: var(--surface-3);
+  --color-navy-600: var(--surface-4);
+
+  --color-green-900: var(--surface-2);
+  --color-green-800: var(--surface-3);
+  --color-green-700: var(--surface-3);
+  --color-green-600: var(--surface-4);
+  --color-green-500: var(--muted);
+
+  --color-beige-50:  var(--surface);
+  --color-beige-100: var(--surface-2);
+  --color-beige-200: var(--surface-3);
+  --color-beige-300: var(--hair-strong);
+
+  --color-gold-100: var(--accent-tint);
+  --color-gold-300: var(--accent);
+  --color-gold-500: var(--accent);
+  --color-gold-600: var(--accent-strong);
+  --color-gold-700: var(--accent-strong);
 
   --color-white: #ffffff;
-  --color-ink: #0a1622;
-  --color-ink-soft: rgba(10, 22, 34, 0.72);
-  --color-ink-faint: rgba(10, 22, 34, 0.5);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--muted);
+  --color-ink-faint: var(--faint);
 
-  /* Semantic aliases */
-  --bg-primary: var(--color-navy-950);
-  --bg-secondary: var(--color-navy-900);
-  --bg-panel: var(--color-navy-800);
-  --bg-light: var(--color-beige-50);
-  --accent-gold: var(--color-gold-500);
-  --accent-gold-bright: var(--color-gold-300);
-  --text-on-dark: var(--color-beige-50);
-  --text-on-dark-soft: rgba(245, 236, 219, 0.72);
-  --text-on-light: var(--color-ink);
-  --border-on-dark: rgba(230, 196, 119, 0.18);
-  --border-on-light: rgba(10, 22, 34, 0.1);
+  --bg-primary:   var(--surface);
+  --bg-secondary: var(--surface-2);
+  --bg-panel:     var(--surface-3);
+  --bg-light:     var(--surface-2);
+  --accent-gold:        var(--accent);
+  --accent-gold-bright: var(--accent);
+  --text-on-dark:       var(--ink);
+  --text-on-dark-soft:  var(--muted);
+  --text-on-light:      var(--ink);
+  --border-on-dark:  var(--hair);
+  --border-on-light: var(--hair);
 
   /* ---- Typography ---- */
-  --font-ar: 'Cairo', 'Segoe UI', sans-serif;
-  --font-en: 'Poppins', 'Segoe UI', sans-serif;
+  --font-ar: 'Cairo', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --font-en: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --font-body: var(--font-ar);
 
-  --fs-display: clamp(2.8rem, 6vw, 6rem);
-  --fs-h1: clamp(2.2rem, 4.5vw, 3.6rem);
-  --fs-h2: clamp(1.8rem, 3.2vw, 2.6rem);
-  --fs-h3: clamp(1.3rem, 2.2vw, 1.7rem);
-  --fs-body: clamp(1rem, 1.1vw, 1.125rem);
+  --fs-display: clamp(2.4rem, 5.4vw, 4.75rem);
+  --fs-h1: clamp(2rem, 4vw, 3.1rem);
+  --fs-h2: clamp(1.6rem, 3vw, 2.3rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.6rem);
+  --fs-body: clamp(1rem, 1.05vw, 1.09rem);
   --fs-small: 0.875rem;
   --fs-xs: 0.75rem;
 
@@ -70,31 +102,77 @@
   --space-3xl: 9rem;
 
   /* ---- Layout ---- */
-  --container-max: 1320px;
-  --radius-sm: 6px;
-  --radius-md: 14px;
-  --radius-lg: 24px;
+  --container-max: 1240px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   --radius-full: 999px;
-  --nav-height: 84px;
+  --nav-height: 66px;
 
-  /* ---- Shadow & motion ---- */
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.35);
-  --shadow-gold: 0 10px 40px rgba(200, 162, 77, 0.25);
+  /* ---- Safe-area (modern phones) ---- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* ---- Shadow & motion (restrained) ---- */
+  --shadow-xs:   0 1px 2px rgba(26, 26, 23, 0.06);
+  --shadow-sm:   0 2px 8px rgba(26, 26, 23, 0.07);
+  --shadow-soft: 0 12px 34px rgba(26, 26, 23, 0.10);
+  --shadow-gold: 0 8px 24px rgba(26, 26, 23, 0.12);
+  --shadow-pop:  0 18px 50px rgba(26, 26, 23, 0.16);
   --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 0.25s;
-  --dur-med: 0.5s;
-  --dur-slow: 0.9s;
+  --dur-fast: 0.2s;
+  --dur-med: 0.42s;
+  --dur-slow: 0.8s;
 
-  /* ---- Gold gradient ---- */
-  --gradient-gold: linear-gradient(120deg, #8f6d24 0%, #e6c477 45%, #c8a24d 60%, #8f6d24 100%);
-  --gradient-navy: linear-gradient(160deg, var(--color-navy-950) 0%, var(--color-navy-800) 100%);
-  --gradient-overlay: linear-gradient(180deg, rgba(6, 13, 20, 0.35) 0%, rgba(6, 13, 20, 0.85) 78%, rgba(6, 13, 20, 1) 100%);
+  /* ---- Gradients (now flat/near-flat neutrals) ---- */
+  --gradient-gold: var(--ink);
+  --gradient-navy: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 60%, var(--surface) 100%);
 }
 
-:root[dir="rtl"] {
-  --font-body: var(--font-ar);
+/* ==========================================================================
+   Dark mode — near-black secondary identity (opt-in via the toggle).
+   Still minimal: one near-black ground, off-white text, hairline borders.
+   ========================================================================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ink:        #f3f2ee;
+  --ink-2:      #d7d6cf;
+  --muted:      #a3a299;
+  --faint:      #74736b;
+  --hair:       rgba(255, 255, 255, 0.14);
+  --hair-soft:  rgba(255, 255, 255, 0.08);
+  --hair-strong:rgba(255, 255, 255, 0.28);
+
+  --surface:    #111110;
+  --surface-2:  #191917;
+  --surface-3:  #222220;
+  --surface-4:  #2e2e2b;
+
+  --accent:       #c9a95f;
+  --accent-strong:#e3c988;
+  --accent-tint:  rgba(201, 169, 95, 0.14);
+
+  --ok:    #57b98c;
+  --danger:#e07a7a;
+
+  --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm:   0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.55);
+  --shadow-gold: 0 8px 26px rgba(0, 0, 0, 0.5);
+  --shadow-pop:  0 20px 56px rgba(0, 0, 0, 0.6);
+
+  --gradient-navy: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(17, 17, 16, 0) 0%, rgba(17, 17, 16, 0.7) 62%, var(--surface) 100%);
 }
-:root[dir="ltr"] {
-  --font-body: var(--font-en);
+
+:root[dir="rtl"] { --font-body: var(--font-ar); }
+:root[dir="ltr"] { --font-body: var(--font-en); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0.01ms; --dur-med: 0.01ms; --dur-slow: 0.01ms; }
 }

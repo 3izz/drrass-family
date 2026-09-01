@@ -6,13 +6,17 @@
 (function (global) {
   'use strict';
 
+  /* Monochrome placeholders: soft warm-grey grounds, ink glyphs. The site
+     identity is white / near-black, so avatars stay quiet and never add
+     colour noise to a tree of hundreds of near-identical names. */
   const PALETTE = [
-    ['#1a4a35', '#2f7a58'],
-    ['#16293b', '#1e3a52'],
-    ['#8f6d24', '#c8a24d'],
-    ['#0c2118', '#235f45'],
-    ['#0f1f2e', '#16293b'],
+    ['#f1f0ec', '#e6e4dd'],
+    ['#eeede8', '#e1dfd7'],
+    ['#f3f2ee', '#e8e6df'],
+    ['#ecebe6', '#dedcd3'],
+    ['#f0efe9', '#e4e2da'],
   ];
+  const INK = '#1a1a17';
 
   function hashStr(str) {
     let h = 0;
@@ -45,7 +49,6 @@
     const seed = hashStr(name || 'family');
     const [c1, c2] = PALETTE[seed % PALETTE.length];
     const initials = initialsOf(name);
-    const gold = '#c8a24d';
 
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 200 200">
@@ -56,9 +59,8 @@
           </linearGradient>
         </defs>
         <rect width="200" height="200" fill="url(#g${seed})"/>
-        <circle cx="100" cy="100" r="92" fill="none" stroke="${gold}" stroke-width="1.5" opacity="0.55"/>
-        <text x="100" y="118" font-family="Cairo, Poppins, sans-serif" font-size="64" font-weight="700"
-          fill="${gold}" text-anchor="middle" opacity="0.92">${initials}</text>
+        <text x="100" y="118" font-family="Cairo, Poppins, sans-serif" font-size="60" font-weight="700"
+          fill="${INK}" text-anchor="middle" opacity="0.82">${initials}</text>
       </svg>
     `.trim();
 
@@ -85,7 +87,6 @@
     const kind = opts.kind || 'default';
     const hash = hashStr(seed || 'family');
     const [c1, c2] = PALETTE[hash % PALETTE.length];
-    const gold = '#c8a24d';
     const icon = ICONS[kind] || ICONS.default;
 
     const svg = `
@@ -97,7 +98,7 @@
           </linearGradient>
         </defs>
         <rect width="200" height="200" fill="url(#p${hash})"/>
-        <g transform="translate(74,74)" stroke="${gold}" stroke-width="1.6" fill="none" opacity="0.85" stroke-linecap="round" stroke-linejoin="round">${icon}</g>
+        <g transform="translate(74,74)" stroke="${INK}" stroke-width="1.6" fill="none" opacity="0.5" stroke-linecap="round" stroke-linejoin="round">${icon}</g>
       </svg>
     `.trim();
 
