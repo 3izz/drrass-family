@@ -6,6 +6,8 @@
 .intro-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; }
 @media (max-width: 900px) { .intro-split { grid-template-columns: 1fr; gap: var(--space-lg); } }
 .intro-split__media { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--hair); background: var(--surface-2); }
+.intro-split__media--wide { aspect-ratio: 16/11; }
+@media (max-width: 900px) { .intro-split__media--wide { aspect-ratio: 16/10; } }
 .intro-split__media .pattern-bg { opacity: 1; }
 .intro-split__frame {
   position: absolute; inset: 12px; border: 1px solid var(--hair); border-radius: calc(var(--radius-lg) - 8px); pointer-events: none;

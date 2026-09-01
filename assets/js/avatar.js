@@ -109,10 +109,17 @@
   function lazyMount(img) {
     if (!img || img.dataset.avatarBound) return;
     img.dataset.avatarBound = '1';
-    const name = img.dataset.name || img.alt || 'Family';
-    const kind = img.dataset.placeholderKind;
-    img.src = kind ? makeContentPlaceholder(name, { kind }) : makeAvatar(name);
     img.classList.add('lazy-img');
+    // Respect a real image that the markup already provides — only generate
+    // a placeholder when there is no usable src.
+    const cur = img.getAttribute('src');
+    if (!cur || cur.indexOf('data:') === 0) {
+      const name = img.dataset.name || img.alt || 'Family';
+      const kind = img.dataset.placeholderKind;
+      img.src = kind ? makeContentPlaceholder(name, { kind }) : makeAvatar(name);
+    }
+    if (img.complete) img.classList.add('is-loaded');
+    else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
     requestAnimationFrame(() => img.classList.add('is-loaded'));
   }
 
