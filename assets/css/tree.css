@@ -29,7 +29,7 @@ body.is-tree {
   padding-inline: max(var(--space-2xs), var(--safe-left)) max(var(--space-2xs), var(--safe-right));
 }
 .tree-topbar__brand { display: flex; align-items: center; gap: var(--space-2xs); flex: none; padding-inline: var(--space-2xs); }
-.tree-topbar__brand .brand__mark { width: 32px; height: 32px; font-size: 0.9rem; }
+.tree-topbar__brand .brand__mark { width: 34px; height: 34px; background-size: 78%; }
 .tree-topbar__title { font-family: var(--font-ar); font-weight: 700; font-size: 0.98rem; color: var(--ink); white-space: nowrap; }
 
 .tree-topbar__search { flex: 1; min-width: 0; max-width: 460px; margin-inline: auto; }

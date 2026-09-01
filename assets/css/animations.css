@@ -31,17 +31,18 @@
 .hero__content { position: relative; z-index: 3; text-align: center; padding-inline: var(--space-md); max-width: 860px; }
 
 .hero__crest {
-  width: 76px; height: 76px;
+  width: 88px; height: 88px;
   margin-inline: auto var(--space-md);
   border-radius: 50%;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--hair-strong);
+  background: url("../images/brand-olive.png") center / 78% no-repeat;
   display: flex; align-items: center; justify-content: center;
   position: relative;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease-luxury) 0.15s forwards;
 }
 .hero__crest::before { content: ""; position: absolute; inset: -10px; border: 1px solid var(--hair); border-radius: 50%; }
-.hero__crest span { font-family: var(--font-ar); font-size: 1.9rem; color: var(--ink); }
+.hero__crest span { font-size: 0; }
 
 .hero__title {
   font-size: var(--fs-display);

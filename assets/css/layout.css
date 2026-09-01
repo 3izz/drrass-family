@@ -20,6 +20,7 @@
   width: 64px; height: 64px;
   border: 1px solid var(--hair-strong);
   border-radius: 50%;
+  background: url("../images/brand-olive.png") center / 68% no-repeat;
   display: flex; align-items: center; justify-content: center;
   position: relative;
   animation: loaderPulse 2s ease-in-out infinite;
@@ -32,7 +33,7 @@
   border-radius: 50%;
   animation: loaderSpin 1.1s linear infinite;
 }
-.loader__emblem span { font-family: var(--font-ar); font-size: 1.4rem; color: var(--ink); }
+.loader__emblem span { font-size: 0; }   /* olive mark replaces the "د" glyph */
 .loader__label { font-size: var(--fs-xs); letter-spacing: 0.28em; text-transform: uppercase; color: var(--faint); }
 @keyframes loaderPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
 @keyframes loaderSpin { to { transform: rotate(360deg); } }
@@ -88,13 +89,12 @@
 
 .brand { display: flex; align-items: center; gap: var(--space-2xs); flex-shrink: 0; }
 .brand__mark {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--hair-strong);
+  background: url("../images/brand-olive.png") center / 76% no-repeat;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-ar);
-  color: var(--ink);
-  font-size: 1rem;
+  font-size: 0;                 /* hide the "د" fallback glyph */
   flex-shrink: 0;
 }
 .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
