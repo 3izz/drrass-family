@@ -17,7 +17,7 @@
   background:
     radial-gradient(ellipse at 30% 20%, rgba(35,95,69,0.32), transparent 55%),
     radial-gradient(ellipse at 75% 80%, rgba(200,162,77,0.12), transparent 50%),
-    linear-gradient(160deg, rgba(6,13,20,0.82) 0%, rgba(10,22,34,0.72) 45%, rgba(12,33,24,0.9) 100%),
+    linear-gradient(160deg, rgba(6,13,20,0.74) 0%, rgba(10,22,34,0.6) 45%, rgba(12,33,24,0.84) 100%),
     url("../images/hero-walaja.jpg");
   background-size: cover;
   background-position: center;

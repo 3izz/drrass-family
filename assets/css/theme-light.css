@@ -33,7 +33,7 @@
 
 /* ---- Header ---- */
 :root[data-theme="light"] .site-header {
-  background: linear-gradient(180deg, rgba(250, 245, 232, 0.8), transparent);
+  background: linear-gradient(180deg, rgba(250, 245, 232, 0.97) 0%, rgba(250, 245, 232, 0.6) 55%, rgba(250, 245, 232, 0) 100%);
 }
 :root[data-theme="light"] .site-header.is-scrolled {
   background: rgba(250, 245, 232, 0.9);
@@ -41,22 +41,37 @@
 }
 
 /* ---- Hero ---- */
+/* The hero keeps its dark, photo-forward treatment even in the light theme —
+   a washed-out light overlay killed the Al-Walaja photo. Dark hero / light
+   body is a deliberate, common pattern. */
 :root[data-theme="light"] .hero__bg {
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(180, 148, 90, 0.18), transparent 55%),
-    linear-gradient(160deg, rgba(250, 245, 232, 0.72) 0%, rgba(242, 233, 209, 0.6) 45%, rgba(236, 223, 192, 0.82) 100%),
+    radial-gradient(ellipse at 30% 20%, rgba(20, 55, 40, 0.28), transparent 55%),
+    linear-gradient(160deg, rgba(10, 18, 14, 0.52) 0%, rgba(18, 24, 20, 0.4) 45%, rgba(8, 16, 12, 0.66) 100%),
     url("../images/hero-walaja.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+:root[data-theme="light"] .hero__vignette {
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 16, 14, 0.22) 55%, rgba(10, 16, 14, 0.5) 100%);
+}
 :root[data-theme="light"] .hero__title {
-  background: linear-gradient(100deg, #2b2013 20%, var(--color-gold-700) 50%, #2b2013 80%);
+  background: linear-gradient(100deg, #fdf6e3 20%, var(--color-gold-100) 50%, #fdf6e3 80%);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
 }
-:root[data-theme="light"] .hero__crest::before { border-color: rgba(143, 109, 36, 0.35); }
+:root[data-theme="light"] .hero__subtitle { color: rgba(251, 247, 239, 0.82); }
+:root[data-theme="light"] .hero__scroll { color: rgba(251, 247, 239, 0.72); }
+:root[data-theme="light"] .hero .btn--outline {
+  color: #fdf6e3;
+  border-color: rgba(251, 247, 239, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+:root[data-theme="light"] .hero__crest { border-color: var(--color-gold-300); }
+:root[data-theme="light"] .hero__crest::before { border-color: rgba(230, 196, 119, 0.4); }
 
 /* ---- Memorial hero (Deaths page) ---- */
 :root[data-theme="light"] .memorial-hero {
