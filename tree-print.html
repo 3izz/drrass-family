@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<script>(function(){try{var t=localStorage.getItem("drrass:theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem("drrass:theme")||"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>شجرة الزيتون العائلية للطباعة (600×260 سم) | الدّراس</title>
+<title>شجرة عائلة الدّراس للطباعة (100×60 سم) | الدّراس</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/theme-light.css">
 <style>
-  body { background: var(--bg-secondary); }
+  body { background: var(--bg-secondary); margin: 0; }
 
   .print-toolbar {
     position: sticky; top: 0; z-index: 100;
@@ -24,34 +24,34 @@
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-on-dark);
   }
-  .print-toolbar__note { font-size: 0.85rem; color: var(--text-on-dark-soft); max-width: 640px; }
+  .print-toolbar__note { font-size: 0.85rem; line-height: 1.7; color: var(--text-on-dark-soft); max-width: 680px; }
   .print-toolbar__note strong { color: var(--accent-gold-bright); }
+  .print-toolbar__actions { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
 
   .poster-scroll {
     width: 100%;
     overflow: auto;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.5rem;
     display: flex;
     justify-content: center;
   }
 
-  /* The poster is sized in REAL physical cm — exact for print. On screen
-     we shrink it with `zoom` (not transform: scale), because zoom
-     actually reduces the element's layout footprint, so the scroll
-     container sizes itself to the shrunk poster instead of the full
-     unscaled 600cm canvas. */
+  /* The poster is sized in REAL physical cm so it prints exactly. On screen
+     we shrink #poster-wrapper with `zoom` (not transform: scale) so the
+     scroll container tracks the shrunk poster instead of the full 100cm canvas. */
   #poster-wrapper {
     flex-shrink: 0;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+    background: #fff;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
     line-height: 0;
   }
-  /* base.css sets `svg { max-width: 100% }` globally for responsive
-     content images — wrong here, this SVG's whole point is to BE exactly
-     600cm regardless of its container. */
-  #poster { display: block; max-width: none; width: 600cm; height: 260cm; }
+  /* base.css sets `img { max-width: 100% }` for responsive content — wrong
+     here: this poster's whole point is to BE exactly 100×60cm. */
+  #poster { display: block; max-width: none; width: 100cm; height: 60cm; object-fit: contain; background: #fff; }
 
   @media print {
-    @page { size: 600cm 260cm; margin: 0; }
+    @page { size: 100cm 60cm; margin: 0; }
+    html, body { background: #fff; }
     .print-toolbar { display: none !important; }
     .poster-scroll { padding: 0; overflow: visible; display: block; }
     #poster-wrapper { zoom: 1 !important; box-shadow: none; }
@@ -62,24 +62,42 @@
 
 <div class="print-toolbar">
   <div class="print-toolbar__note">
-    <strong>ملاحظة للطباعة:</strong> هذا التصميم مُعدّ ليُطبع بمقاس <strong>600 × 260 سم (6 × 2.6 متر تقريبًا) أفقي</strong> بالضبط
-    (يعمل أيضًا بجودة كاملة عند 400×175 أو 300×130 أو 200×87 سم لأنه تصميم متجهي (Vector) بالكامل).
-    عند التوجّه لمطبعة، أخبرهم بالمقاس الذي اخترته — الملف متجهي فلا يفقد الجودة عند التكبير أو التصغير.
+    <strong>للطباعة:</strong> هذا الملف مُعدّ ليُطبع بمقاس <strong>١٠٠ × ٦٠ سم (١م × ٠٫٦م) أفقي</strong>.
+    التصميم متجهي (SVG) فلا يفقد الجودة عند التكبير أو التصغير — يعمل بنفس الجودة بأي مقاس على النسبة نفسها (٥٠×٣٠ سم، ٢٠٠×١٢٠ سم…).
+    <br><strong>لحفظه PDF:</strong> اضغط «تنزيل PDF»، ثم من نافذة الطباعة اختر <em>الوجهة: حفظ كـ PDF</em>، ومقاس الورق <em>١٠٠×٦٠ سم</em> (أو Custom)، والهوامش <em>بلا</em>.
   </div>
-  <div style="display:flex; gap:0.75rem; align-items:center;">
+  <div class="print-toolbar__actions">
     <a href="tree.html" class="btn btn--outline btn--sm">↩ العودة للشجرة</a>
-    <button class="btn btn--gold btn--sm" id="do-print">طباعة / حفظ PDF</button>
+    <a href="assets/images/family-tree-poster.svg" download="شجرة-عائلة-الدراس.svg" class="btn btn--outline btn--sm">⬇ تنزيل SVG</a>
+    <button class="btn btn--gold btn--sm" id="do-print">⬇ تنزيل PDF / طباعة</button>
   </div>
 </div>
 
 <div class="poster-scroll">
   <div id="poster-wrapper">
-    <svg id="poster" xmlns="http://www.w3.org/2000/svg" width="600cm" height="260cm" viewBox="0 0 600 260"></svg>
+    <img id="poster" src="assets/images/family-tree-poster.svg" alt="شجرة عائلة الدّراس — نسخة الطباعة">
   </div>
 </div>
 
-<script src="assets/js/data-loader.js"></script>
-<script src="assets/js/qrcode.js"></script>
-<script src="assets/js/tree-print.js"></script>
+<script>
+  (function () {
+    var wrapper = document.getElementById('poster-wrapper');
+    var POSTER_PX = 100 * (96 / 2.54); // 100cm at ~96dpi
+
+    function fitToScreen() {
+      var available = window.innerWidth - 64;
+      wrapper.style.zoom = Math.min(1, available / POSTER_PX).toFixed(4);
+    }
+    fitToScreen();
+    window.addEventListener('resize', fitToScreen);
+
+    document.getElementById('do-print').addEventListener('click', function () {
+      var z = wrapper.style.zoom;
+      wrapper.style.zoom = 1;
+      window.print();
+      setTimeout(function () { wrapper.style.zoom = z; }, 600);
+    });
+  })();
+</script>
 </body>
 </html>
