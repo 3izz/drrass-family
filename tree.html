@@ -24,15 +24,16 @@
 <link rel="stylesheet" href="assets/css/pages.css">
 <link rel="stylesheet" href="assets/css/rtl.css">
 <link rel="stylesheet" href="assets/css/theme-light.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
 
-<div class="loader" aria-hidden="true"><div class="loader__emblem"><span>د</span></div><div class="loader__label">الدّراس</div></div>
+<div class="loader" aria-hidden="true"><div class="loader__emblem"><img src="assets/images/emblem-olive-branch.png" alt="" class="emblem-img"></div><div class="loader__label">الدّراس</div></div>
 
 <header class="site-header">
   <div class="site-header__inner">
     <a href="index.html" class="brand">
-      <span class="brand__mark">د</span>
+      <span class="brand__mark"><img src="assets/images/emblem-olive-branch.png" alt="" class="emblem-img"></span>
       <span class="brand__text"><span class="brand__name" data-i18n="brand.name">الدّراس</span><span class="brand__tagline" data-i18n="brand.tagline">من جذورٍ راسخة</span></span>
     </a>
     <nav class="main-nav" id="main-nav" aria-label="التنقل الرئيسي">
@@ -78,7 +79,7 @@
       <button class="btn btn--outline btn--sm" id="compare-toggle" data-i18n="tree.compare">🔗 حاسبة القرابة</button>
       <button class="btn btn--outline btn--sm" id="expand-all-btn" data-i18n="tree.expandAll">فتح الكل</button>
       <button class="btn btn--outline btn--sm" id="collapse-all-btn" data-i18n="tree.collapseAll">طي الكل</button>
-      <a class="btn btn--outline btn--sm" href="tree-print.html" target="_blank" rel="noopener" data-i18n="tree.print">🖨️ طباعة الشجرة (200×100سم)</a>
+      <a class="btn btn--outline btn--sm" href="tree-print.html" target="_blank" rel="noopener" data-i18n="tree.print" title="طباعة شجرة العائلة بمقاس جداري">🖨️ طباعة الشجرة</a>
     </div>
   </div>
 
@@ -93,7 +94,7 @@
       <div class="tree-canvas" id="tree-canvas"></div>
     </div>
     <div class="tree-empty-state" id="tree-loading">
-      <div class="loader__emblem" style="width:56px;height:56px;"><span style="font-size:1rem;">د</span></div>
+      <div class="loader__emblem" style="width:56px;height:56px;"><img src="assets/images/emblem-olive-branch.png" alt="" class="emblem-img"></div>
       <p data-i18n="common.loading">جارٍ التحميل...</p>
     </div>
     <div class="tree-zoom-controls">

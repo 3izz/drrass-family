@@ -108,6 +108,11 @@
   function lazyMount(img) {
     if (!img || img.dataset.avatarBound) return;
     img.dataset.avatarBound = '1';
+    // Already has a real image file — never overwrite it with a placeholder.
+    if (img.getAttribute('src')) {
+      img.classList.add('lazy-img', 'is-loaded');
+      return;
+    }
     const name = img.dataset.name || img.alt || 'Family';
     const kind = img.dataset.placeholderKind;
     img.src = kind ? makeContentPlaceholder(name, { kind }) : makeAvatar(name);

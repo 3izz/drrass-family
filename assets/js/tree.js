@@ -54,9 +54,10 @@
     members.forEach((m) => { if ((m.generation || 1) <= 3) expanded.add(m.id); });
 
     populateBranchFilter();
-    applyUrlParams();
+    const hadFocus = applyUrlParams();
     loadingEl.style.display = 'none';
     render();
+    if (!hadFocus) resetView(false);
   }
 
   function populateBranchFilter() {
@@ -83,7 +84,9 @@
       expandAncestors(focus);
       selectedId = focus;
       setTimeout(() => centerOn(focus), 400);
+      return true;
     }
+    return false;
   }
 
   // ---------------------------------------------------------------------
@@ -350,9 +353,31 @@
     applyTransform(false);
   }
 
+  // Fit the whole visible tree inside the stage (used on desktop load / reset).
+  function fitToView(animated) {
+    const stageRect = stage.getBoundingClientRect();
+    if (!stageRect.width) return;
+    const cw = (contentBounds.maxX - contentBounds.minX) + 80;
+    const ch = (contentBounds.maxY - contentBounds.minY) + 80;
+    const margin = 24;
+    let s = Math.min(
+      (stageRect.width - margin * 2) / cw,
+      (stageRect.height - margin * 2) / ch
+    );
+    s = Math.min(Math.max(s, 0.14), 1);
+    scale = s;
+    tx = stageRect.width / 2 - (cw / 2) * s;
+    ty = stageRect.height / 2 - (ch / 2) * s;
+    applyTransform(!!animated);
+  }
+
+  function resetView(animated) {
+    fitToView(animated);
+  }
+
   document.getElementById('zoom-in').addEventListener('click', () => zoomBy(1.25));
   document.getElementById('zoom-out').addEventListener('click', () => zoomBy(0.8));
-  document.getElementById('zoom-reset').addEventListener('click', () => centerOn(rootId, { scale: 1 }));
+  document.getElementById('zoom-reset').addEventListener('click', () => resetView(true));
 
   stage.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -360,27 +385,60 @@
     zoomBy(e.deltaY < 0 ? 1.12 : 0.9, { x: e.clientX - rect.left, y: e.clientY - rect.top });
   }, { passive: false });
 
+  // Pointer pan + two-finger pinch zoom (mouse, trackpad, touch).
   let isPanning = false, panStart = { x: 0, y: 0 }, panOrigin = { x: 0, y: 0 };
+  const pointers = new Map();
+  let pinchPrevDist = 0;
+
   stage.addEventListener('pointerdown', (e) => {
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      isPanning = false;
+      stage.classList.remove('is-grabbing');
+      viewport.classList.remove('is-panning');
+      const pts = [...pointers.values()];
+      pinchPrevDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      return;
+    }
     if (e.target.closest('.tree-node') || e.target.closest('button')) return;
     isPanning = true;
     stage.classList.add('is-grabbing');
     viewport.classList.add('is-panning');
     panStart = { x: e.clientX, y: e.clientY };
     panOrigin = { x: tx, y: ty };
-    stage.setPointerCapture(e.pointerId);
+    try { stage.setPointerCapture(e.pointerId); } catch (err) { /* not capturable */ }
   });
   stage.addEventListener('pointermove', (e) => {
+    if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pointers.size === 2) {
+      const pts = [...pointers.values()];
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (pinchPrevDist > 0 && dist > 0) {
+        const rect = stage.getBoundingClientRect();
+        zoomBy(dist / pinchPrevDist, {
+          x: (pts[0].x + pts[1].x) / 2 - rect.left,
+          y: (pts[0].y + pts[1].y) / 2 - rect.top,
+        });
+      }
+      pinchPrevDist = dist;
+      return;
+    }
+
     if (!isPanning) return;
     tx = panOrigin.x + (e.clientX - panStart.x);
     ty = panOrigin.y + (e.clientY - panStart.y);
     applyTransform(false);
   });
   ['pointerup', 'pointercancel', 'pointerleave'].forEach((evt) => {
-    stage.addEventListener(evt, () => {
-      isPanning = false;
-      stage.classList.remove('is-grabbing');
-      viewport.classList.remove('is-panning');
+    stage.addEventListener(evt, (e) => {
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinchPrevDist = 0;
+      if (pointers.size === 0) {
+        isPanning = false;
+        stage.classList.remove('is-grabbing');
+        viewport.classList.remove('is-panning');
+      }
     });
   });
 
@@ -409,12 +467,13 @@
   document.getElementById('expand-all-btn').addEventListener('click', () => {
     members.forEach((m) => expanded.add(m.id));
     render();
+    fitToView(true);
   });
   document.getElementById('collapse-all-btn').addEventListener('click', () => {
     expanded.clear();
     members.forEach((m) => { if ((m.generation || 1) <= 3) expanded.add(m.id); });
     render();
-    centerOn(rootId, { scale: 1 });
+    resetView(true);
   });
 
   // ---------------------------------------------------------------------

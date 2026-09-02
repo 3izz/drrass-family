@@ -43,9 +43,12 @@
 /* ---- Hero ---- */
 :root[data-theme="light"] .hero__bg {
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(180, 148, 90, 0.22), transparent 55%),
-    radial-gradient(ellipse at 75% 80%, rgba(200, 162, 77, 0.16), transparent 50%),
-    linear-gradient(160deg, #faf5e8 0%, #f2e9d1 45%, #ecdfc0 100%);
+    radial-gradient(ellipse at 30% 20%, rgba(180, 148, 90, 0.18), transparent 55%),
+    linear-gradient(160deg, rgba(250, 245, 232, 0.72) 0%, rgba(242, 233, 209, 0.6) 45%, rgba(236, 223, 192, 0.82) 100%),
+    url("../images/hero-walaja.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 :root[data-theme="light"] .hero__title {
   background: linear-gradient(100deg, #2b2013 20%, var(--color-gold-700) 50%, #2b2013 80%);

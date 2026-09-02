@@ -1,0 +1,133 @@
+/* ==========================================================================
+   الدّراس — Responsive & touch refinements
+   Loaded last. Progressive tightening for tablet / phone, bigger tap
+   targets, and touch ergonomics for the interactive tree.
+   ========================================================================== */
+
+/* ---- Olive-branch emblem inside the circular marks (loader / brand / hero) ---- */
+.emblem-img {
+  width: 74%;
+  height: 74%;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.28));
+}
+.loader__emblem .emblem-img { width: 64%; height: 64%; }
+.brand__mark .emblem-img { width: 86%; height: 86%; }
+:root[data-theme="light"] .emblem-img { filter: drop-shadow(0 1px 2px rgba(80, 60, 20, 0.25)); }
+
+/* iOS dynamic viewport height for the full-bleed hero */
+.hero { min-height: 100svh; }
+
+/* ---- Global guard against horizontal overflow on small screens ---- */
+html, body { overflow-x: clip; max-width: 100%; }
+
+/* ============================ TABLET  ≤ 980px ============================ */
+@media (max-width: 980px) {
+  :root {
+    --space-2xl: 4rem;
+    --space-3xl: 5.5rem;
+  }
+}
+
+/* ========================= LARGE PHONE  ≤ 760px ========================= */
+@media (max-width: 760px) {
+  :root {
+    --space-2xl: 3.25rem;
+    --space-3xl: 4.5rem;
+    --space-xl: 2.5rem;
+    --space-lg: 1.75rem;
+  }
+
+  /* Hero */
+  .hero__crest { width: 74px; height: 74px; }
+  .hero__cta { width: 100%; }
+  .hero__cta .btn { flex: 1 1 42%; justify-content: center; padding-inline: 1rem; }
+  .hero__scroll { display: none; }
+
+  .btn { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
+  .card { padding: var(--space-sm); }
+  .page-hero__subtitle { font-size: 0.95rem; }
+
+  /* Modal / member profile */
+  .modal { max-height: 92vh; }
+  .member-profile__header {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+  .member-profile__avatar { width: 88px; height: 88px; }
+  .member-profile__body { padding: var(--space-md); gap: var(--space-md); }
+
+  .origin-map { height: 300px; }
+  .footer-bottom { justify-content: center; text-align: center; }
+
+  .lightbox__nav { width: 42px; height: 42px; }
+  .lightbox__frame img { max-height: 68vh; }
+}
+
+/* ========================= SMALL PHONE  ≤ 480px ========================= */
+@media (max-width: 480px) {
+  :root { --nav-height: 64px; }
+
+  .container { padding-inline: 1.15rem; }
+
+  /* Header: keep everything on one row without clipping the wordmark */
+  .site-header__inner { gap: 0.5rem; padding-inline: 0.9rem; }
+  .brand { gap: 0.4rem; min-width: 0; }
+  .brand__tagline { display: none; }
+  .brand__name { font-size: 0.95rem; }
+  .brand__mark { width: 34px; height: 34px; }
+  .header-actions { gap: 0.35rem; }
+  .lang-switch__btn { padding: 0.3rem 0.5rem; font-size: 0.68rem; }
+  .theme-toggle, .nav-toggle { width: 38px; height: 38px; }
+
+  .hero__cta { flex-direction: column; }
+  .hero__cta .btn { width: 100%; flex: none; }
+
+  .eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; }
+
+  .stats-strip { gap: var(--space-2xs); }
+  .stat { padding: var(--space-2xs); }
+  .stat__label { font-size: 0.78rem; }
+
+  .filter-bar { gap: 0.4rem; }
+  .filter-chip { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+
+  .gallery-lead { flex-direction: column; align-items: flex-start; gap: var(--space-2xs); }
+
+  .modal__close { top: 0.5rem; inset-inline-end: 0.5rem; }
+}
+
+/* ===================== INTERACTIVE TREE — touch ======================= */
+.tree-stage { touch-action: none; }
+
+@media (max-width: 900px) {
+  .tree-toolbar { padding: 0.5rem 0.6rem; gap: 0.4rem; }
+  .tree-toolbar .search-box { flex: 1 1 55%; max-width: none; min-width: 0; }
+  .tree-toolbar__select { flex: 1 1 38%; min-width: 0; padding: 0.5rem 0.7rem; }
+  .tree-toolbar__controls {
+    margin-inline-start: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .tree-toolbar__controls .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 0.5rem 0.55rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .tree-legend { display: none; }
+  .tree-zoom-controls { inset-inline-start: 0.6rem; bottom: 0.6rem; }
+  .tree-zoom-controls button { width: 48px; height: 48px; font-size: 1.3rem; }
+
+  .relation-viewer { max-height: 62vh; }
+  .relation-viewer__inner { padding: var(--space-sm); gap: var(--space-sm); }
+  .relation-viewer__slot { min-width: 0; flex: 1 1 100%; }
+  .relation-viewer__result { font-size: 1rem; }
+}
