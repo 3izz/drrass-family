@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#faf5e8">
+<title>عائلة الدّراس</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf5e8;
+    --card: #fffdf7;
+    --ink: #2b2013;
+    --ink-soft: rgba(43, 32, 19, 0.7);
+    --gold: #8f6d24;
+    --gold-bright: #c8a24d;
+    --line: rgba(43, 32, 19, 0.16);
+    --error: #a3271c;
+    --ok: #2f7a58;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    background: radial-gradient(circle at 50% 20%, #fffaf0 0%, var(--bg) 55%, #f2e9d1 100%);
+    color: var(--ink);
+    font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .card {
+    width: 100%; max-width: 440px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px 28px 30px;
+    box-shadow: 0 20px 60px rgba(80, 60, 20, 0.14);
+    text-align: center;
+  }
+  .emblem { font-size: 56px; line-height: 1; }
+  h1 { margin: 10px 0 4px; font-size: 34px; font-weight: 900; color: var(--gold); }
+  .lead { margin: 0 0 26px; color: var(--ink-soft); font-size: 19px; }
+  label { display: block; margin-bottom: 10px; font-size: 24px; font-weight: 700; }
+  .field { position: relative; }
+  input {
+    width: 100%; height: 64px;
+    padding: 0 20px 0 96px;
+    border: 2px solid var(--line); border-radius: 16px;
+    background: #fff; color: var(--ink);
+    font: inherit; font-size: 24px; text-align: center;
+  }
+  input:focus { outline: none; border-color: var(--gold-bright); box-shadow: 0 0 0 4px rgba(200, 162, 77, 0.25); }
+  .show {
+    position: absolute; top: 50%; left: 10px; transform: translateY(-50%);
+    height: 44px; padding: 0 14px;
+    border: 0; border-radius: 10px;
+    background: #f2e9d1; color: var(--ink);
+    font: inherit; font-size: 17px; cursor: pointer;
+  }
+  button[type="submit"] {
+    width: 100%; height: 64px; margin-top: 18px;
+    border: 0; border-radius: 16px;
+    background: linear-gradient(135deg, #e6c477 0%, #c8a24d 50%, #a97d1f 100%);
+    color: #1d1508;
+    font: inherit; font-size: 26px; font-weight: 900;
+    cursor: pointer;
+  }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: wait; }
+  .msg { min-height: 34px; margin: 16px 0 0; font-size: 20px; font-weight: 700; }
+  .msg.is-error { color: var(--error); }
+  .msg.is-ok { color: var(--ok); }
+  .hint { margin: 18px 0 0; font-size: 16px; color: var(--ink-soft); }
+  .shake { animation: shake 0.4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+  @media (prefers-reduced-motion: reduce) { .shake { animation: none; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="emblem" aria-hidden="true">🌳</div>
+  <h1>عائلة الدّراس</h1>
+  <p class="lead">هذا الموقع خاص بأفراد العائلة</p>
+
+  <!-- onsubmit keeps the password out of the URL even if the script below fails to load -->
+  <form id="lock-form" autocomplete="on" onsubmit="return false;">
+    <label for="password">اكتب كلمة السر</label>
+    <div class="field">
+      <input id="password" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required autofocus>
+      <button type="button" class="show" id="show">إظهار</button>
+    </div>
+    <button type="submit" id="enter">دخول</button>
+  </form>
+
+  <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  <p class="hint">لا تعرف كلمة السر؟ اسأل أحد أفراد العائلة.</p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  // relative path from this page to the site root (filled in by encrypt-site.js)
+  var ROOT = '';
+
+  var form = document.getElementById('lock-form');
+  var input = document.getElementById('password');
+  var enterBtn = document.getElementById('enter');
+  var showBtn = document.getElementById('show');
+  var msg = document.getElementById('msg');
+
+  function say(text, kind) {
+    msg.textContent = text;
+    msg.className = 'msg' + (kind ? ' is-' + kind : '');
+  }
+
+  function busy(on, text) {
+    enterBtn.disabled = on;
+    input.disabled = on;
+    if (text) say(text, null);
+  }
+
+  showBtn.addEventListener('click', function () {
+    var hidden = input.type === 'password';
+    input.type = hidden ? 'text' : 'password';
+    showBtn.textContent = hidden ? 'إخفاء' : 'إظهار';
+    input.focus();
+  });
+
+  var supported = 'serviceWorker' in navigator && window.crypto && crypto.subtle && window.indexedDB && window.Promise;
+  if (!supported) {
+    form.hidden = true;
+    say('هذا المتصفح لا يفتح الموقع. افتح الرابط في متصفح Chrome أو Safari (وليس من داخل فيسبوك أو نافذة خاصة).', 'error');
+    return;
+  }
+
+  // Same forgiving rules as encrypt-site.js: hamza forms, ة/ه, ى/ي, tashkeel,
+  // Arabic or English digits, capitals, spaces and dashes don't matter.
+  function normalizePassword(text) {
+    return String(text).normalize('NFKD')
+      .replace(/[̀-ًͯ-ٰٟـ]/g, '')
+      .replace(/[٠-٩]/g, function (d) { return String(d.charCodeAt(0) - 0x0660); })
+      .replace(/[۰-۹]/g, function (d) { return String(d.charCodeAt(0) - 0x06F0); })
+      .replace(/ٱ/g, 'ا').replace(/[ىی]/g, 'ي').replace(/ة/g, 'ه')
+      .replace(/ک/g, 'ك').replace(/ء/g, '')
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]/gu, '');
+  }
+
+  function fromBase64(b64) {
+    var bin = atob(b64), out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+
+  function idb(mode, fn) {
+    return new Promise(function (resolve, reject) {
+      var open = indexedDB.open('drrass-lock', 1);
+      open.onupgradeneeded = function () { open.result.createObjectStore('kv'); };
+      open.onerror = function () { reject(open.error); };
+      open.onsuccess = function () {
+        var tx = open.result.transaction('kv', mode);
+        var req = fn(tx.objectStore('kv'));
+        tx.oncomplete = function () { resolve(req && req.result); };
+        tx.onerror = function () { reject(tx.error); };
+      };
+    });
+  }
+  var getKey = function () { return idb('readonly', function (s) { return s.get('key'); }); };
+  var setKey = function (key) { return idb('readwrite', function (s) { return s.put(key, 'key'); }); };
+
+  var metaPromise = fetch(ROOT + 'enc/meta.json', { cache: 'no-cache' }).then(function (r) { return r.json(); });
+  var manifestPromise = fetch(ROOT + 'enc/manifest.bin', { cache: 'no-cache' }).then(function (r) { return r.arrayBuffer(); });
+  var registration = navigator.serviceWorker.register(ROOT + 'sw.js');
+
+  async function deriveKey(password) {
+    var meta = await metaPromise;
+    var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(normalizePassword(password)), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      { name: 'PBKDF2', hash: 'SHA-256', salt: fromBase64(meta.salt), iterations: meta.iterations },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+    );
+  }
+
+  // a key is right if it opens the encrypted file list (AES-GCM rejects anything else)
+  async function opens(key) {
+    try {
+      var buf = new Uint8Array(await manifestPromise);
+      await crypto.subtle.decrypt({ name: 'AES-GCM', iv: buf.slice(0, 12) }, key, buf.slice(12));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function handOver() {
+    busy(true);
+    say('✓ تم، جارٍ فتح الموقع…', 'ok');
+    var reg = await registration;
+    await navigator.serviceWorker.ready;
+    if (reg.active) reg.active.postMessage('reset');
+    // guard against a reload loop if the worker can't serve the page for some reason
+    var last = Number(sessionStorage.getItem('drrass-unlock') || 0);
+    if (Date.now() - last < 10000) {
+      busy(false);
+      say('تعذّر فتح الموقع. أغلق الصفحة وافتحها من جديد.', 'error');
+      return;
+    }
+    sessionStorage.setItem('drrass-unlock', String(Date.now()));
+    location.reload();
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!input.value.trim()) return;
+    busy(true, 'لحظة من فضلك…');
+    try {
+      var key = await deriveKey(input.value);
+      if (await opens(key)) {
+        await setKey(key);
+        return handOver();
+      }
+      busy(false);
+      say('كلمة السر غير صحيحة، حاول مرة ثانية', 'error');
+      form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+      input.select();
+    } catch (err) {
+      busy(false);
+      say('حدث خطأ في الاتصال، حاول مرة ثانية', 'error');
+    }
+  });
+
+  // already unlocked on this device (e.g. after a hard refresh)? go straight in
+  getKey().then(function (key) {
+    return key && opens(key).then(function (ok) { if (ok) handOver(); });
+  }).catch(function () { /* nothing saved yet */ });
+})();
+</script>
+</body>
+</html>
