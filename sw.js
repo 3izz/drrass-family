@@ -9,7 +9,7 @@
  */
 'use strict';
 
-const BUILD = '2026-10-11T08:21:47.247Z-2ef12500'; // changes on every publish so browsers pick up the new file list
+const BUILD = '2026-10-11T10:25:27.447Z-9fb0a6e3'; // changes on every publish so browsers pick up the new file list
 
 const TYPES = {
   html: 'text/html; charset=utf-8', css: 'text/css; charset=utf-8', js: 'text/javascript; charset=utf-8',

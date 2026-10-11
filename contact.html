@@ -101,12 +101,14 @@
   <p class="hint">لا تعرف كلمة السر؟ اسأل أحد أفراد العائلة.</p>
 </main>
 
+
 <script>
 (function () {
   'use strict';
 
   // relative path from this page to the site root (filled in by encrypt-site.js)
   var ROOT = '';
+  var rootHref = new URL(ROOT || './', location.href).href; // the site folder, never the page itself
 
   var form = document.getElementById('lock-form');
   var input = document.getElementById('password');
@@ -132,10 +134,10 @@
     input.focus();
   });
 
-  var supported = 'serviceWorker' in navigator && window.crypto && crypto.subtle && window.indexedDB && window.Promise;
+  var supported = window.crypto && crypto.subtle && window.Promise && window.TextDecoder && window.DOMParser;
   if (!supported) {
     form.hidden = true;
-    say('هذا المتصفح لا يفتح الموقع. افتح الرابط في متصفح Chrome أو Safari (وليس من داخل فيسبوك أو نافذة خاصة).', 'error');
+    say('هذا المتصفح قديم ولا يفتح الموقع. افتح الرابط في متصفح Chrome أو Safari.', 'error');
     return;
   }
 
@@ -171,12 +173,22 @@
       };
     });
   }
-  var getKey = function () { return idb('readonly', function (s) { return s.get('key'); }); };
-  var setKey = function (key) { return idb('readwrite', function (s) { return s.put(key, 'key'); }); };
+  function getKey() {
+    try { return idb('readonly', function (s) { return s.get('key'); }); } catch (e) { return Promise.resolve(null); }
+  }
+  function setKey(key) {
+    try { return idb('readwrite', function (s) { return s.put(key, 'key'); }).catch(function () {}); } catch (e) { return Promise.resolve(); }
+  }
 
   var metaPromise = fetch(ROOT + 'enc/meta.json', { cache: 'no-cache' }).then(function (r) { return r.json(); });
   var manifestPromise = fetch(ROOT + 'enc/manifest.bin', { cache: 'no-cache' }).then(function (r) { return r.arrayBuffer(); });
-  var registration = navigator.serviceWorker.register(ROOT + 'sw.js');
+
+  // Normal browsers decrypt in a service worker (sw.js). In-app browsers
+  // (WhatsApp, Facebook, …) and private windows often can't run one; there
+  // this page decrypts and shows the requested page itself (showHere).
+  var registration = ('serviceWorker' in navigator)
+    ? navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { return null; })
+    : Promise.resolve(null);
 
   async function deriveKey(password) {
     var meta = await metaPromise;
@@ -198,22 +210,208 @@
     }
   }
 
-  async function handOver() {
+  function within(ms, promise) {
+    return Promise.race([promise, new Promise(function (resolve) { setTimeout(function () { resolve(null); }, ms); })]);
+  }
+
+  async function openSite(key) {
     busy(true);
     say('✓ تم، جارٍ فتح الموقع…', 'ok');
     var reg = await registration;
-    await navigator.serviceWorker.ready;
-    if (reg.active) reg.active.postMessage('reset');
-    // guard against a reload loop if the worker can't serve the page for some reason
     var last = Number(sessionStorage.getItem('drrass-unlock') || 0);
-    if (Date.now() - last < 10000) {
-      busy(false);
-      say('تعذّر فتح الموقع. أغلق الصفحة وافتحها من جديد.', 'error');
+    var justReloaded = Date.now() - last < 10000; // the worker already had its chance and didn't serve the page
+    if (reg && !justReloaded && await within(5000, navigator.serviceWorker.ready)) {
+      if (reg.active) reg.active.postMessage('reset');
+      sessionStorage.setItem('drrass-unlock', String(Date.now()));
+      location.reload();
       return;
     }
-    sessionStorage.setItem('drrass-unlock', String(Date.now()));
-    location.reload();
+    try {
+      await showHere(key);
+    } catch (err) {
+      busy(false);
+      say('تعذّر فتح الموقع. أغلق الصفحة وافتحها من جديد.', 'error');
+    }
   }
+
+  // ---------------------------------------------------------------------
+  // Without a service worker: decrypt the page, inline its scripts, styles
+  // and images, and write it over this lock page.
+  // ---------------------------------------------------------------------
+
+  // Self-contained (no outer variables): it is also injected as source into
+  // the shown page, so data requests keep working there.
+  function createVault(rootHref, key) {
+    var TYPES = {
+      css: 'text/css', js: 'text/javascript', json: 'application/json', html: 'text/html', txt: 'text/plain',
+      svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif',
+      webp: 'image/webp', ico: 'image/x-icon', pdf: 'application/pdf', mp4: 'video/mp4',
+    };
+    var MEDIA = /\.(svg|png|jpe?g|gif|webp|ico|pdf|mp4)$/i;
+
+    function storedKey() {
+      return new Promise(function (resolve, reject) {
+        var open = indexedDB.open('drrass-lock', 1);
+        open.onupgradeneeded = function () { open.result.createObjectStore('kv'); };
+        open.onerror = function () { reject(open.error); };
+        open.onsuccess = function () {
+          var req = open.result.transaction('kv', 'readonly').objectStore('kv').get('key');
+          req.onsuccess = function () { resolve(req.result); };
+          req.onerror = function () { reject(req.error); };
+        };
+      });
+    }
+    function decrypt(k, buffer) {
+      var bytes = new Uint8Array(buffer);
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes.slice(0, 12) }, k, bytes.slice(12));
+    }
+    var ready = (key ? Promise.resolve(key) : storedKey()).then(function (k) {
+      return fetch(rootHref + 'enc/manifest.bin').then(function (r) { return r.arrayBuffer(); })
+        .then(function (buf) { return decrypt(k, buf); })
+        .then(function (plain) { return { key: k, files: JSON.parse(new TextDecoder().decode(plain)).files }; });
+    });
+
+    function type(path) { return TYPES[path.split('.').pop().toLowerCase()] || 'application/octet-stream'; }
+
+    // absolute URL -> path inside the site ("assets/js/tree.js"), or null
+    function sitePath(href) {
+      if (href.indexOf(rootHref) !== 0) return null;
+      var path = decodeURIComponent(href.slice(rootHref.length).split(/[?#]/)[0]);
+      return (path === '' || path.slice(-1) === '/') ? path + 'index.html' : path;
+    }
+
+    var reads = {};
+    function read(path) {
+      if (!reads[path]) {
+        reads[path] = ready.then(function (s) {
+          var blob = s.files[path];
+          if (!blob) return null;
+          return fetch(rootHref + 'enc/' + blob).then(function (r) { return r.ok ? r.arrayBuffer() : null; })
+            .then(function (buf) { return buf && decrypt(s.key, buf); });
+        });
+      }
+      return reads[path];
+    }
+    function text(path) {
+      return read(path).then(function (buf) { return buf && new TextDecoder().decode(buf); });
+    }
+    var dataUrls = {};
+    function dataUrl(path) {
+      if (!dataUrls[path]) {
+        dataUrls[path] = read(path).then(function (buf) {
+          if (!buf) return null;
+          var bytes = new Uint8Array(buf), bin = '';
+          for (var i = 0; i < bytes.length; i += 32768) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768));
+          return 'data:' + type(path) + ';base64,' + btoa(bin);
+        });
+      }
+      return dataUrls[path];
+    }
+    // url as written in a page/CSS/JSON, resolved against base -> data: URL, or null if not a site file
+    function inline(url, base) {
+      if (!url || /^(data:|blob:|#)/i.test(url)) return Promise.resolve(null);
+      var path = null;
+      try { path = sitePath(new URL(url, base).href); } catch (e) { /* not a URL */ }
+      return path ? dataUrl(path) : Promise.resolve(null);
+    }
+    function inlineCss(css, base) {
+      var found = [];
+      css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, function (m, q, url) { found.push(url); return m; });
+      return Promise.all(found.map(function (url) { return inline(url, base); })).then(function (urls) {
+        var i = 0;
+        return css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, function (m) { var u = urls[i++]; return u ? 'url("' + u + '")' : m; });
+      });
+    }
+    // image paths inside JSON data (gallery, documents, …) -> data: URLs
+    function inlineJson(value, base) {
+      if (typeof value === 'string') {
+        return MEDIA.test(value) ? inline(value, base).then(function (u) { return u || value; }) : Promise.resolve(value);
+      }
+      if (value && typeof value === 'object') {
+        var keys = Object.keys(value);
+        return Promise.all(keys.map(function (k) { return inlineJson(value[k], base); })).then(function (vals) {
+          keys.forEach(function (k, i) { value[k] = vals[i]; });
+          return value;
+        });
+      }
+      return Promise.resolve(value);
+    }
+
+    return { ready: ready, sitePath: sitePath, read: read, text: text, type: type, inline: inline, inlineCss: inlineCss, inlineJson: inlineJson };
+  }
+
+  // Runs inside the shown page: answers fetch() for site files from the vault.
+  function installFetchShim() {
+    var vault = window.__drrassVault;
+    var nativeFetch = window.fetch.bind(window);
+    window.fetch = function (input, init) {
+      var url = typeof input === 'string' ? input : (input && input.url);
+      var method = (init && init.method) || (input && input.method) || 'GET';
+      var path = url && method.toUpperCase() === 'GET' && vault.sitePath(new URL(url, location.href).href);
+      if (!path) return nativeFetch(input, init);
+      return vault.read(path).then(function (buf) {
+        if (!buf) return nativeFetch(input, init);
+        if (!/\.json$/i.test(path)) return new Response(buf, { headers: { 'Content-Type': vault.type(path) } });
+        return vault.inlineJson(JSON.parse(new TextDecoder().decode(buf)), location.href).then(function (data) {
+          return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
+        });
+      });
+    };
+  }
+
+  async function showHere(key) {
+    var vault = createVault(rootHref, key);
+    window.__drrassVault = vault;
+    var pageUrl = location.href;
+    var html = await vault.text(vault.sitePath(pageUrl.split(/[?#]/)[0]));
+    if (html == null) throw new Error('page not found');
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var jobs = [];
+
+    doc.querySelectorAll('script[src]').forEach(function (el) {
+      var path = vault.sitePath(new URL(el.getAttribute('src'), pageUrl).href);
+      if (!path) return;
+      jobs.push(vault.text(path).then(function (code) {
+        if (code == null) return;
+        el.removeAttribute('src');
+        el.textContent = code.replace(/<\/script/gi, '<\\/script');
+      }));
+    });
+    doc.querySelectorAll('link[rel~="stylesheet"][href]').forEach(function (el) {
+      var href = new URL(el.getAttribute('href'), pageUrl).href;
+      var path = vault.sitePath(href);
+      if (!path) return;
+      jobs.push(vault.text(path).then(function (css) { return css == null ? null : vault.inlineCss(css, href); }).then(function (css) {
+        if (css == null) return;
+        var style = doc.createElement('style');
+        style.textContent = css;
+        el.replaceWith(style);
+      }));
+    });
+    doc.querySelectorAll('img[src], source[src], video[src], audio[src], video[poster]').forEach(function (el) {
+      ['src', 'poster'].forEach(function (attr) {
+        if (!el.hasAttribute(attr)) return;
+        jobs.push(vault.inline(el.getAttribute(attr), pageUrl).then(function (u) { if (u) el.setAttribute(attr, u); }));
+      });
+    });
+    doc.querySelectorAll('[style*="url("]').forEach(function (el) {
+      jobs.push(vault.inlineCss(el.getAttribute('style'), pageUrl).then(function (css) { el.setAttribute('style', css); }));
+    });
+    doc.querySelectorAll('style').forEach(function (el) {
+      jobs.push(vault.inlineCss(el.textContent, pageUrl).then(function (css) { el.textContent = css; }));
+    });
+    await Promise.all(jobs);
+
+    var shim = doc.createElement('script');
+    shim.textContent = 'window.__drrassVault = window.__drrassVault || (' + createVault + ')(' + JSON.stringify(rootHref) + ');(' + installFetchShim + ')();';
+    doc.head.insertBefore(shim, doc.head.firstChild);
+
+    document.open();
+    document.write('<!DOCTYPE html>' + doc.documentElement.outerHTML);
+    document.close();
+  }
+
+  // ---------------------------------------------------------------------
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -223,7 +421,7 @@
       var key = await deriveKey(input.value);
       if (await opens(key)) {
         await setKey(key);
-        return handOver();
+        return openSite(key);
       }
       busy(false);
       say('كلمة السر غير صحيحة، حاول مرة ثانية', 'error');
@@ -235,9 +433,9 @@
     }
   });
 
-  // already unlocked on this device (e.g. after a hard refresh)? go straight in
+  // already unlocked on this device? go straight in
   getKey().then(function (key) {
-    return key && opens(key).then(function (ok) { if (ok) handOver(); });
+    return key && opens(key).then(function (ok) { if (ok) openSite(key); });
   }).catch(function () { /* nothing saved yet */ });
 })();
 </script>
