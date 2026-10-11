@@ -151,7 +151,10 @@
       .replace(/ٱ/g, 'ا').replace(/[ىی]/g, 'ي').replace(/ة/g, 'ه')
       .replace(/ک/g, 'ك').replace(/ء/g, '')
       .toLowerCase()
-      .replace(/[^\p{L}\p{N}]/gu, '');
+      .replace(/و/g, '') // the letter و is ignored, so a phrase works with or without "and"
+      .split(/[^\p{L}\p{N}]+/u)
+      .map(function (word) { return word.replace(/^ال(?=..)/, ''); }) // a leading ال is ignored
+      .join('');
   }
 
   function fromBase64(b64) {
